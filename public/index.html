@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>NEWS</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  
+    <link href="./css/style_newsWebsite.css" rel="stylesheet" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+</head>
+<body>
+<main id="app" class="container">
+    <navigation-bar
+        v-on:change-page="changePage($event)"
+        v-if="statut === 'user'"
+    ></navigation-bar>
+
+    <navigation-bar-invite
+        v-on:change-page="changePage($event)"
+        v-if="statut === 'invite'"
+    ></navigation-bar-invite>
+
+    <section v-if="currentPage === 'inscription'" id="inscription">
+        <inscription v-on:change-page="changePage($event)" ></inscription>
+    </section>
+
+    <section v-if="currentPage === 'connexion'" id="connexion">
+        <connexion v-on:change-page="changePage($event)" ></connexion>
+    </section>
+
+    <section v-if="currentPage === 'index'">
+        <plus-articles v-on:change-page="changePage($event)"></plus-articles>
+    </section>
+
+    <section v-if="currentPage === 'liste-articles'">
+        <liste-articles v-on:change-page="changePage($event)" ></liste-articles>
+    </section>
+    
+
+    <section v-if="currentPage === 'contact'">
+        <contact></contact>
+    </section>
+
+    <section v-if="currentPage === 'article1'">
+        <article1></article1>
+    </section>
+
+    <section v-if="currentPage === 'article2'">
+        <article2></article2>
+    </section>
+
+    <section v-if="currentPage === 'article3'">
+        <article3></article3>
+    </section>
+
+    <section v-if="currentPage === 'article4'">
+        <article4></article4>
+    </section>
+
+    <section v-if="currentPage === 'article5'">
+        <article5></article5>
+    </section>
+
+    <section v-if="currentPage === 'article6'">
+        <article6></article6>
+    </section>
+
+    <section v-if="currentPage === 'article7'">
+        <article7></article7>
+    </section>
+
+    <section v-if="currentPage === 'article8'">
+        <article8></article8>
+    </section>
+
+    <section v-if="currentPage === 'article9'">
+        <article9></article9>
+    </section>
+
+    <section v-if="currentPage === 'article10'">
+        <article10></article10>
+    </section>
+
+    <section v-if="currentPage === 'article15'">
+        <article15></article15>
+    </section>
+
+    <section v-if="currentPage === 'article16'">
+        <article16></article16>
+    </section>
+    
+    
+    <section>
+        <footer-page>
+        </footer-page>
+    </section>
+
+
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.15.2/axios.js"></script>
+<script src="component.js"></script>
+<script src="vueIndex.js">
+</script>
+</body>
+</html>

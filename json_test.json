@@ -1,0 +1,18 @@
+{
+  "users": [
+    {
+      "_id": "5be6d9bbbe9ce1025e3b9ec1",
+      "name": "admin",
+      "email": "ilyess94500@hotmail.fr",
+      "username": "admin",
+      "password": "12"
+    },
+    {
+      "_id": "5be70ad5296d7723fcd48b56",
+      "name": "Ilyess MAROUF",
+      "email": "ilyess94500@hotmail.fr",
+      "username": "marouj",
+      "password": "$2a$10$xNz.D/SbYuJyK.0EIu6E9uJN4xPgZspzJx0pUZbSPuCvgEdAkYoUS"
+    }
+  ]
+}

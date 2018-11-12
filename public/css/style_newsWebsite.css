@@ -1,0 +1,249 @@
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: gainsboro;
+    color: black;
+    text-align: center;
+ }
+
+.item{
+    margin-left : 10%;
+    margin-right : 10%;
+}
+
+.imagesCaroussel{
+    margin-left : 23%;
+    margin-right : 27%;
+    border-radius: 10%;
+}
+
+#containerArticles{
+    margin-top: 2%; 
+    /*margin-left: 10%; 
+    margin-right: 10% ;*/
+    height: 100%;
+    background-color: #F2F2F2;
+    border-radius: 10px;
+    overflow: hidden;
+    padding-bottom: 3%;
+    margin-bottom: 3%;
+    
+}
+
+h3{
+    
+    font-weight: bold;
+    text-align: center;
+}
+
+.articlesGauche{
+    float : left;
+    /*border : 2px  solid red;*/
+    width: 45%;
+    margin-left: 3%
+}
+
+.articlesDroite{
+    float : right;
+    /*border : 2px solid yellow;*/
+    width: 45%;
+    margin-right: 3%;
+}
+
+#articles1{
+    /*border : 2px solid black;*/
+}
+
+.titre{
+    font-size: 20px;
+    margin-left: 8%;
+}
+
+
+.imgArticlesGauche{
+    margin-left: 21%;
+}
+
+.imgArticlesDroite{
+    margin-left: 21%;
+}
+
+hr.style2 {
+	border-top: 3px double #8c8b8b;
+}
+
+
+h3{
+    
+    font-weight: bold;
+    text-align: center;
+}
+
+
+.imgArticles{
+    margin-left : 2%;
+}
+
+
+hr.style2 {
+    border-top: 3px double #8c8b8b;
+}
+
+.texte{
+    margin-left : 23%;
+    margin-top : -10%;
+    float : right; 
+     
+    
+}
+
+ .containerContact{
+    margin-left: 29%;
+    margin-right: -30%;
+ }
+
+
+.form-area
+{
+    background-color: #FAFAFA;
+    padding: 10px 40px 60px;
+    margin: 10px 0px 60px;
+}
+
+
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: gainsboro;
+    color: black;
+    text-align: center;
+ }
+
+
+ #containerArticleEntier{
+    margin-top: 2%; 
+    height: 100%;
+    background-color: #F2F2F2;
+    border-radius: 10px;
+    overflow: hidden;
+    padding-bottom: 3%;
+    margin-bottom: 3%;
+    
+}
+
+ #titreArticleEntier{
+    font-size: 28px;
+    margin-left : 25%;
+    margin-right : 25%;
+    text-align: center;
+ }
+
+ #imageArticle{
+     margin-top : 2%;
+     margin-left : 15%;
+     margin-right: 15%;
+ }
+
+ #texteArticle{
+     text-align: justify;
+     font-family: 'Lucida Console', Monaco, monospace;
+     font-size: 16px;
+     margin-left: 5%;
+     margin-right: 5%;
+     font-weight: bold;
+ }
+
+ #commentaire{
+     margin-left : 5%;
+     margin-right: 15%;
+     font-size: 18px;
+     font-weight: bold;
+     text-align: justify;
+}
+
+#commentaireUser{
+    margin-left : 8%;
+    margin-right: 8%;
+}
+
+#labelCommentaire{
+    font-family: 'Lucida Console', Monaco, monospace;
+    font-weight: bold;
+    font-size: 16px;
+
+}
+
+
+
+.lienLireSuite{
+    color: blue !important;
+}
+
+
+
+
+
+
+#containerConnexion{
+    width:400px;
+    margin:0 auto;
+    margin-top:10%;
+    margin-left: 32%;
+}
+#formulaireConnexion {
+    width:100%;
+    padding: 30px;
+    border: 1px solid #f1f1f1;
+    background: #fff;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+#containerConnexion h1{
+    width: 38%;
+    margin: 0 auto;
+    padding-bottom: 10px;
+}
+
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+#boutonLogin {
+    background-color: #5490EF;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+#boutonLogin:hover {
+    background-color: white;
+    color: #53af57;
+    border: 1px solid #4560FF;
+}
+
+
+#monForm {
+    /*position:absolute;*/
+    top:50%;
+    left:50%;
+    height: auto;
+    margin-left: 25%;
+    margin-right: 20%;
+    
+    
+ }
+
+
+
