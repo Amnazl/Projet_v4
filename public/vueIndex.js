@@ -88,7 +88,7 @@ const app = new Vue({
     inscriptionuser(user){
       if (user.password === user.repeatpassword){
         this.$http.post('/register',user).then(() => {
-            this.changePage('listeDesFilms')
+            this.changePage('listeDesFilms')l
             alert('Vous êtes désormais inscrit !')
         }).catch(error =>{
           console.log(error)
