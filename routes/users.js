@@ -48,10 +48,10 @@ router.post('/register',function(req,res){
     var username = req.body.username;
     var password = req.body.password;
     var password2 = req.body.password2;
-    username_global = req.body.username;
+   // username_global = req.body.username;
     //validation
 
-    req.checkBody('name', 'Name is required').notEmpty();
+    /*req.checkBody('name', 'Name is required').notEmpty();
     req.checkBody('email', 'Email is required').notEmpty();
     req.checkBody('email', 'Email is not valid').isEmail();
     req.checkBody('username', 'Username is required').notEmpty();
@@ -63,8 +63,8 @@ router.post('/register',function(req,res){
         res.render('register',{
             errors:errors
         });
-    } else {
-        var newUser = new User({
+    } else {*/
+    	var newUser = new User({
             name: name,
             email: email,
             username: username,
@@ -78,7 +78,7 @@ router.post('/register',function(req,res){
 
             if(isNotValide){
                 req.flash('error_msg',"Nom d'utilisateur déjà utilisé");
-                res.redirect('/users/register');
+                //res.redirect('/users/register');
             }else{
                 bcrypt.genSalt(10, function(err, salt) {
                     bcrypt.hash(newUser.password, salt, function(err, hash) {
@@ -90,7 +90,7 @@ router.post('/register',function(req,res){
                                 req.flash('error_msg',"Ajout utilisateur impossible");
                             }else{
                                 req.flash('succes_msg','Tu es inscris, tu peux maintenant aller te connecter');
-                                res.redirect('/users/login');
+                                //res.redirect('/users/login');
                             }
                         })
                     });
@@ -99,7 +99,7 @@ router.post('/register',function(req,res){
             }
         })
 
-    }
+   // }
 });
 
 checkUser = function(username,data){
