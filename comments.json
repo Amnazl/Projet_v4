@@ -1,0 +1,18 @@
+{
+  "comments": [
+    {
+      "_id": "5be97a24bbadc21b18b73ad6",
+      "username": "amine",
+      "id_article": 1,
+      "content": "Amine",
+      "date": 1542027812311
+    },
+    {
+      "_id": "5be98320cfab791e3cff97cc",
+      "username": "marouj",
+      "id_article": 1,
+      "content": "Ilyess",
+      "date": 1542030112193
+    }
+  ]
+}

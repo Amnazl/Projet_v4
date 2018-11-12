@@ -12,7 +12,7 @@ var fs = require('fs');
 
 var cons = require('consolidate');
 
-var date_file = fs.readFileSync('json_test.json');
+var date_file = fs.readFileSync('users.json');
 
 var users_file = JSON.parse(date_file);
 
