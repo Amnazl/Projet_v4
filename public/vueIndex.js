@@ -38,13 +38,14 @@ const app = new Vue({
     },
 
     inscription(){
+        alert("dzadz");
           this.$http.post('/users/register').then(() => {
               this.changePage('index')
               alert('Vous êtes désormais inscrit !')
-          })
+          });
 
 
-      }
+      },
 
 
 

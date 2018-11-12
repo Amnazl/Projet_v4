@@ -25,7 +25,10 @@
     ></navigation-bar-invite>
 
     <section v-if="currentPage === 'inscription'" id="inscription">
-        <inscription v-on:change-page="changePage($event)" ></inscription>
+        <inscription
+                v-on:change-page="changePage($event)"
+                v-on:inscription="inscription()"
+        ></inscription>
     </section>
 
     <section v-if="currentPage === 'connexion'" id="connexion">

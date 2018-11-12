@@ -7,7 +7,7 @@ var bcrypt = require('bcryptjs');
 
 var User = require('../models/user');
 var Comment = require('../models/comment');
-var Article = require('../models/article');
+//var Article = require('../models/article');
 var username_global;
 
 // Get Homepage
