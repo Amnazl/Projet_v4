@@ -180,31 +180,31 @@
         template: `
     
     <div id=monForm>
-            <form>
+            <!--<form method="post" action="/users/register">-->
 
                 <div class="form-group">
                     <label for="Nom">Nom :</label>
-                    <input type="text" class="form-control" id="Nom" placeholder="Votre nom" required="required">
-                </div>
-                <div class="form-group">
-                    <label for="Prenom">Prénom :</label>
-                    <input type="text" class="form-control" id="Prenom" placeholder="Votre prénom" required="required">
+                    <input type="text" class="form-control" id="Nom" name="name" placeholder="Votre nom" required="required">
                 </div>
                 <div class="form-group">
                     <label for="Email">Adresse mail :</label>
-                    <input type="email" class="form-control" id="Email" aria-describedby="emailHelp" placeholder="Entrez votre mail" required="required">
+                    <input type="email" class="form-control" id="Email" name="email" aria-describedby="emailHelp" placeholder="Entrez votre mail" required="required">
                     <small id=" emailHelp " class=" form-text text-muted">Votre email sera votre identifiant de connexion.</em></small>
                 </div>
                 <div class="form-group">
+                    <label for="Username">Username :</label>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Votre username" required="required">
+                </div>
+                <div class="form-group">
                     <label for="Password">Mot de passe :</label>
-                    <input type="password" class="form-control" id="Password" placeholder="Mot de passe" required="required">
+                    <input type="password" class="form-control" id="Password" name="password" placeholder="Mot de passe" required="required">
                 </div>
                 <div class="form-group">
                     <label for="Password2">Mot de passe (vérification) :</label>
-                    <input type="password" class="form-control" id="Password2" placeholder="Veuillez ressaisir votre mot de passe" required="required">
+                    <input type="password" class="form-control" id="Password2" name="password2" placeholder="Veuillez ressaisir votre mot de passe" required="required">
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+                <a class="btn btn-primary" @click="$emit('inscription')">Submit</a>
+            <!--</form>-->
         </div>
   
     `

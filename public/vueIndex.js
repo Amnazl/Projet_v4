@@ -32,9 +32,22 @@ const app = new Vue({
           })
         })
     },*/
+
     changePage (page) {
       this.currentPage = page;
     },
+
+    inscription(){
+          this.$http.post('/users/register').then(() => {
+              this.changePage('index')
+              alert('Vous êtes désormais inscrit !')
+          })
+
+
+      }
+
+
+
 
     // Films
     /*viewFilm (indexFilm) {
@@ -85,19 +98,6 @@ const app = new Vue({
       this.pseudo = user
       this.changePage("connexion")
     },
-    inscriptionuser(user){
-      if (user.password === user.repeatpassword){
-        this.$http.post('/register',user).then(() => {
-            this.changePage('listeDesFilms')l
-            alert('Vous êtes désormais inscrit !')
-        }).catch(error =>{
-          console.log(error)
-          alert(error.body)
-        })
-      }
-      else{
-        alert("Le mot de passe n'est pas identique")
-      }
-    }*/
+    */
   }
 })
