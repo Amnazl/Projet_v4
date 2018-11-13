@@ -38,7 +38,9 @@ router.get('/',function(req,res){
 });
 
 router.get('/user', function(req, res){
-    res.send(req.user);
+    //var u = req.user.toString();
+    console.log(username_global);
+    res.send(username_global);
 })
 
 
@@ -130,6 +132,7 @@ passport.use(new LocalStrategy(
             User.comparePassword(password, user.password, function (err, isMatch) {
                 if (err) throw err;
                 if (isMatch) {
+                    username_global = user.username;
                     return done(null, user);
                 } else {
                     return done(null, false, { message: 'Mauvais mot de passe' });
@@ -150,18 +153,50 @@ passport.deserializeUser(function (id, done) {
     });
 });
 
+
+
+
 router.post('/login',
-    passport.authenticate('local'), function(req, res){
-        res.send(req.user);
+    passport.authenticate('local', { failureRedirect: '/users/error'}),
+    function(req, res){
+
+
+        if(req.user !== 'undefined'){
+            console.log(req.user);
+            res.send(req.user);
+        }else{
+            console.log("pas user");
+            res.status(201).send();
+        }
+
+       //res.send(req.data);
 
     });
 
+
+/*router.get('/succes',function (req, res) {
+    console.log("2"+req.user);
+    res.send(req.user);
+
+});*/
+
+router.get('/error',function (req, res) {
+    console.log("ddd");
+    res.send('Connexion impossible');
+
+});
+
+
+
+
+
 router.get('/logout', function (req, res) {
-    req.logout();
+    //req.logout();
+    username_global = '';
+    //req.flash('success_msg', 'Tu es déconnecté');
 
-    req.flash('success_msg', 'Tu es déconnecté');
-
-    res.redirect('/users/login');
+    //res.redirect('/users/login');
+    res.status(200).send();
 });
 
 

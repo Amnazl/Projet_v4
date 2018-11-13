@@ -3,7 +3,7 @@
     'use strict'
     
     Vue.component('navigation-bar', {
-
+        props : ['username'],
         template : `
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -33,7 +33,8 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                 <li class="nav-item">
-                    <li> <a class="nav-link" @click="$emit('change-page', 'connexion')">Deconnexion</a></li>
+                    <li> <a class="nav-link" v-if="username === ''" @click="$emit('change-page', 'connexion')">Connexion</a></li>
+                    <li> <a class="nav-link" v-if="username !== ''" @click="$emit('deconnexion')">Deconnexion</a></li>
                 </li>
             </ul>
             </div>
@@ -153,7 +154,7 @@
         data: function () {
           return {
             identifiantsUser : {
-                'username': '',
+                'username': this.username,
                 'password': '',
             }
           }
@@ -252,7 +253,7 @@
           <span class="glyphicon glyphicon-chevron-right"></span>
           <span class="sr-only">Suivant</span>
         </a>
-    </div>
+    </div>user
 
     <div id="containerArticles">
         
@@ -264,7 +265,7 @@
                 <a @click="$emit('change-page', 'article1')"">
                     <img class="imgArticlesGauche" src="images/article1.jpg" alt="article1" width="300" height="250">
                     <label class="titre" id="titreArticle1">
-                            <b>Comment la 5G va-t-elle changer nos vies ?</b>
+                            <b>userComment la 5G va-t-elle changer nos vies ?</b>
                     </label>
                 </a>
                 

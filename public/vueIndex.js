@@ -3,24 +3,20 @@ const app = new Vue({
   el: '#app',
   data: {
     currentPage: 'index',
-    filter: '',
-    menu: '',
-    name: '',
-    statut : 'user',
+    username : '',
 
   },
-  /*created () {
+  created () {
+
+     // alert("tess");
     // Ici, l'utilisation d'une fonction flêchée () => {} plutôt que function () {} est primordial !
     // sans fonction fléchée, this.myList = ... ne fonctionnera pas comme prévu
-    this.$http.get('/list')
-      .then(list => {
-        console.log('affichage de ma liste', list)
-        this.filmsList = list.data
-      })
-      .catch(err => {
-        console.log('error', err)
-      })
-  },*/
+    this.$http.get('/users/user').then((req) => {
+        if(req.data !== null){
+            this.username = req.data;
+        }
+    });
+  },
   methods: {
     /*sendNewElement () {
       this.$http.post('/users/login', {
@@ -47,7 +43,7 @@ const app = new Vue({
                 this.$http.post('/users/register', dataInscriptionUser).then((req) => {
                     if (req.data === 'Inscription réussi') {
                         console.log("Reussi");
-                        console.log("Reussi");
+
                         this.changePage('connexion');
                     }
                     if (req.data === "Nom d\'utilisateur déjà utilisé") {
@@ -63,11 +59,27 @@ const app = new Vue({
 
 
       connexionUser(identifiantsUser){
-        this.$http.post('/users/login', identifiantsUser).then(() => {
-          alert("on est good");
-          this.changePage('index');
+        this.$http.post('/users/login', identifiantsUser).then((req) => {
+
+            if(req.data === 'Connexion impossible'){
+                alert("Connexion impossible");
+            }else{
+                this.username = req.data;
+                alert("login :"+ req.data);
+                this.changePage('index');
+            }
+        })
+      },
+
+      logout(){
+        this.$http.get('/users/logout').then(() => {
+            this.username = '';
+            this.changePage('index');
         })
       }
+
+
+
 
 
 
