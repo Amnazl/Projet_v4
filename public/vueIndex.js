@@ -47,6 +47,7 @@ const app = new Vue({
                 this.$http.post('/users/register', dataInscriptionUser).then((req) => {
                     if (req.data === 'Inscription réussi') {
                         console.log("Reussi");
+                        console.log("Reussi");
                         this.changePage('connexion');
                     }
                     if (req.data === "Nom d\'utilisateur déjà utilisé") {
