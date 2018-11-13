@@ -158,8 +158,8 @@ router.post('/login',
 
 router.get('/logout', function (req, res) {
     req.logout();
-
-    req.flash('success_msg', 'Tu es déconnecté');
+    //req.flash('success_msg', 'Tu es déconnecté');
+    res.status(200);
 
     res.redirect('/users/login');
 });
