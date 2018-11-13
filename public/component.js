@@ -127,21 +127,21 @@
     
     <div id="containerConnexion">
 
-      <form id=formulaireConnexion method="POST" action="/users/authentification">
+      <form id=formulaireConnexion>
 
           <h1>Connexion</h1>
 
         <div class="composantsConnexion" >
-          <input id="identifiant" type="text" name="username" placeholder="Identifiant (email)">
+          <input id="identifiant" type="text" v-model="identifiantsUser.username" name="username" placeholder="Identifiant (email)">
         </div>
         <div class="composantsConnexion" >
-          <input id="motDePasse" type="password" name="password" placeholder="Mot de passe">
+          <input id="motDePasse" type="password" v-model="identifiantsUser.password" name="password" placeholder="Mot de passe">
         </div>
         <div class="composantsConnexion">
-          <input id="boutonLogin" type="submit" Value="Connexion">
+          <a class="btn btn-primary" @click="$emit('connexion-user', identifiantsUser)"></a>
         </div>
         <div class="composantsConnexion" id="nonInscrit_connexion">
-          <b>Pas encore inscrit ? </b> <a@click="$emit('change-page', 'inscription')">Inscription</a>
+          <b>Pas encore inscrit ? </b> <u><a@click="$emit('change-page', 'inscription')">Inscription</a></u>
         </div>
         <div class="composantsConnexion" id="invite_connexion">
           <a @click="$emit('change-page', 'index')">Se connecter en invité</a>
@@ -149,31 +149,17 @@
       </form>
       
 
-    </div>
-    
-    `,
+    </div>`,
         data: function () {
           return {
-            user : this.user,
-            password: ''
-          }
-        },
-        methods: {
-          login () {
-            var compo = this
-            this.$http.post('/login', {
-              user: this.user,
-              password: this.password
-            }).then(function (response){
-              if (response.status === 200) {
-                console.log(response.data.user)
-                compo.$emit('changeuser', response.data.user)
-                }
-              })
+            identifiantsUser : {
+                'username': '',
+                'password': '',
             }
+          }
         }
-      }
-    );
+
+      });
 
 
     Vue.component('inscription', {
@@ -185,14 +171,12 @@
                 <label for="Nom">Nom :</label>
                 <input type="text" class="form-control" id="Nom" name="name" v-model="dataInscriptionUser.name" placeholder="Votre nom" required="required">
             </div>
-            <div class="form-group">
-                <label for="Email">Adresse mail :</label>
-                <input type="email" class="form-control" id="Email" name="email" v-model="dataInscriptionUser.email" aria-describedby="emailHelp" placeholder="Entrez votre mail" required="required">
-                <small id=" emailHelp " class=" form-text text-muted">Votre email sera votre identifiant de connexion.</em></small>
-            </div>
+            
             <div class="form-group">
                 <label for="Username">Username :</label>
                 <input type="text" class="form-control" id="username" name="username" v-model="dataInscriptionUser.username" placeholder="Votre username" required="required">
+                <small id=" usernameHelp " class=" form-text text-muted">Votre username sera votre identifiant de connexion.</em></small>
+
             </div>
             <div class="form-group">
                 <label for="Password">Mot de passe :</label>
@@ -209,7 +193,6 @@
             return {
               dataInscriptionUser : {
                 'name': '',
-                'email': '',
                 'username' : '',
                 'password' :'',
                 'password2' : ''

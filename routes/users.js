@@ -43,6 +43,7 @@ router.get('/user', function(req, res){
 
 
 router.post('/register',function(req,res){
+    console.log("Une requete post est en cours..");
     var name = req.body.name;
     var email = req.body.email;
     var username = req.body.username;
@@ -66,7 +67,6 @@ router.post('/register',function(req,res){
     } else {*/
     	var newUser = new User({
             name: name,
-            email: email,
             username: username,
             password: password
         });
@@ -77,9 +77,10 @@ router.post('/register',function(req,res){
             var isNotValide = checkUser(newUser.username,data);
 
             if(isNotValide){
-                req.flash('error_msg',"Nom d'utilisateur déjà utilisé");
+                res.send("Nom d'utilisateur déjà utilisé");
+                //req.flash('error_msg',"Nom d'utilisateur déjà utilisé");
             }else{
-                console.log("2");
+                //console.log("2");
                 bcrypt.genSalt(10, function(err, salt) {
                     bcrypt.hash(newUser.password, salt, function(err, hash) {
                         newUser.password = hash;
@@ -87,9 +88,11 @@ router.post('/register',function(req,res){
                         data.users.push(newUser);
                         fs.writeFile('./users.json', JSON.stringify(data,null,2), 'utf-8', function(err) {
                             if(err){
-                                res.status(200).send('L\'inscription a echoué');
+                                res.send('Inscription a echoué');
                             }else{
-                                res.status(200).send('L\'inscription est un succès');
+                              // res.status(2).send("ss");
+                               res.send('Inscription réussi');
+                                //res.status().send
 
                             }
                         })
@@ -105,7 +108,7 @@ checkUser = function(username,data){
 
     for(var i of data.users ){
 
-        if(i.username == username){
+        if(i.username === username){
             boolean = 1;
             break;
         }
@@ -148,10 +151,7 @@ passport.deserializeUser(function (id, done) {
 });
 
 router.post('/login',
-    passport.authenticate('local',{succesRedirect:'/', failureRedirect:'/users/authentification',failureFlash: true}),
-    function(req, res){
-        //console.log(req.user.username);
-        //res.redirect('/');
+    passport.authenticate('local'), function(req, res){
         res.send(req.user);
 
     });

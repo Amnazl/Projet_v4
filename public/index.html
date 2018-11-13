@@ -32,7 +32,8 @@
     </section>
 
     <section v-if="currentPage === 'connexion'" id="connexion">
-        <connexion v-on:change-page="changePage($event)" ></connexion>
+        <connexion v-on:change-page="changePage($event)"
+                    v-on:connexion-user="connexionUser($event)"></connexion>
     </section>
 
     <section v-if="currentPage === 'index'">
