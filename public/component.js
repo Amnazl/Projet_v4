@@ -138,7 +138,7 @@
           <input id="motDePasse" type="password" v-model="identifiantsUser.password" name="password" placeholder="Mot de passe">
         </div>
         <div class="composantsConnexion">
-          <a class="btn btn-primary" @click="$emit('connexion-user', identifiantsUser)"></a>
+          <a class="btn btn-primary" @click="$emit('connexion-user', identifiantsUser)">Connexion</a>
         </div>
         <div class="composantsConnexion" id="nonInscrit_connexion">
           <b>Pas encore inscrit ? </b> <u><a@click="$emit('change-page', 'inscription')">Inscription</a></u>

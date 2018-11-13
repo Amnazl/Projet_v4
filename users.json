@@ -29,6 +29,18 @@
       "name": "ilyess MAROUF",
       "username": "kdkd",
       "password": "$2a$10$mLZovfuQJ7pZWuhS2.WeR.2lGzAV70Ptp6OS9xaNqHXl6iaNTVjrq"
+    },
+    {
+      "_id": "5beaddf6e251295de85285f3",
+      "name": "ilyess MAROUF",
+      "username": "maroufd",
+      "password": "$2a$10$VfJCT82jKXsKhIzP5pw3IOyNJyxd7kNmYegIHroQdgf383iwx/xDm"
+    },
+    {
+      "_id": "5beade5952f2ee5e3af15328",
+      "name": "admin",
+      "username": "maroujxxxdd",
+      "password": "$2a$10$tfrkMHFCoiqm0/YdyjexAu7wg7NvRgDY5iZKjGtbHL6ns1Xwml772"
     }
   ]
 }
