@@ -6,7 +6,8 @@ const app = new Vue({
     filter: '',
     menu: '',
     name: '',
-    statut : 'user'
+    statut : 'user',
+
   },
   /*created () {
     // Ici, l'utilisation d'une fonction flêchée () => {} plutôt que function () {} est primordial !
@@ -37,68 +38,14 @@ const app = new Vue({
       this.currentPage = page;
     },
 
-    inscription(){
-        alert("dzadz");
-          this.$http.post('/users/register').then(() => {
-              this.changePage('index')
-              alert('Vous êtes désormais inscrit !')
-          });
+    inscription(dataInscriptionUser){
 
-
-      },
-
-
-
-
-    // Films
-    /*viewFilm (indexFilm) {
-      this.currentFilmId = indexFilm;
-      this.changePage("viewFilm");
-    },
-    editFilm (indexFilm) {
-      this.currentFilmId = indexFilm;
-      this.changePage("editFilm");
-    },
-    createFilm (film) {
-      if (film.Title == "") {
-          alert('Veuillez indiquer le titre')
-      }
-      else {
-        film['Index'] = this.filmsList.length
-        this.$http.post('/add',film).then(() =>{
-            this.filmsList.push(film)
-            this.changePage('listeDesFilms')
-            alert('Votre film a bien été créé')
-        })
-      }
-    },
-
-    modifyFilm (film) {
-
-      console.log(film)
-
-      if (film.Title == "") {
-            alert('Veuillez indiquer le titre')
-      }
-      else {
-          //film['Index'] = this.filmsList.length
-          this.$http.post('/edit',film).then(() => {
-              //this.filmsList.push(film)
-              //console.log(this.filmsList[film.Index])
-              this.filmsList[film.Index] = film
-              this.changePage('listeDesFilms')
-              alert('Votre film a bien été modifié')
-          })
-      }
+      this.$http.post('/users/register', dataInscriptionUser).then(() => {
+          this.changePage('index');
+      });
     },
 
 
-    // User
-    changeuser(user){
-      console.log('iciiiiii')
-      this.pseudo = user
-      this.changePage("connexion")
-    },
-    */
+
   }
 })

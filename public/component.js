@@ -179,36 +179,43 @@
     Vue.component('inscription', {
         template: `
     
-    <div id=monForm>
-            <!--<form method="post" action="/users/register">-->
+        <div id=monForm>
+    
+            <div class="form-group">
+                <label for="Nom">Nom :</label>
+                <input type="text" class="form-control" id="Nom" name="name" v-model="dataInscriptionUser.name" placeholder="Votre nom" required="required">
+            </div>
+            <div class="form-group">
+                <label for="Email">Adresse mail :</label>
+                <input type="email" class="form-control" id="Email" name="email" v-model="dataInscriptionUser.email" aria-describedby="emailHelp" placeholder="Entrez votre mail" required="required">
+                <small id=" emailHelp " class=" form-text text-muted">Votre email sera votre identifiant de connexion.</em></small>
+            </div>
+            <div class="form-group">
+                <label for="Username">Username :</label>
+                <input type="text" class="form-control" id="username" name="username" v-model="dataInscriptionUser.username" placeholder="Votre username" required="required">
+            </div>
+            <div class="form-group">
+                <label for="Password">Mot de passe :</label>
+                <input type="password" class="form-control" id="Password" name="password" v-model="dataInscriptionUser.password" placeholder="Mot de passe" required="required">
+            </div>
+            <div class="form-group">
+                <label for="Password2">Mot de passe (vérification) :</label>
+                <input type="password" class="form-control" id="Password2" name="password2" v-model="dataInscriptionUser.password2" placeholder="Veuillez ressaisir votre mot de passe" required="required">
+            </div>
+            <a class="btn btn-primary" @click="$emit('inscription', dataInscriptionUser)">Submit</a>
+        </div>`,
 
-                <div class="form-group">
-                    <label for="Nom">Nom :</label>
-                    <input type="text" class="form-control" id="Nom" name="name" placeholder="Votre nom" required="required">
-                </div>
-                <div class="form-group">
-                    <label for="Email">Adresse mail :</label>
-                    <input type="email" class="form-control" id="Email" name="email" aria-describedby="emailHelp" placeholder="Entrez votre mail" required="required">
-                    <small id=" emailHelp " class=" form-text text-muted">Votre email sera votre identifiant de connexion.</em></small>
-                </div>
-                <div class="form-group">
-                    <label for="Username">Username :</label>
-                    <input type="text" class="form-control" id="username" name="username" placeholder="Votre username" required="required">
-                </div>
-                <div class="form-group">
-                    <label for="Password">Mot de passe :</label>
-                    <input type="password" class="form-control" id="Password" name="password" placeholder="Mot de passe" required="required">
-                </div>
-                <div class="form-group">
-                    <label for="Password2">Mot de passe (vérification) :</label>
-                    <input type="password" class="form-control" id="Password2" name="password2" placeholder="Veuillez ressaisir votre mot de passe" required="required">
-                </div>
-                <a class="btn btn-primary" @click="$emit('inscription')">Submit</a>
-            <!--</form>-->
-        </div>
-  
-    `
-        
+          data: function() {
+            return {
+              dataInscriptionUser : {
+                'name': '',
+                'email': '',
+                'username' : '',
+                'password' :'',
+                'password2' : ''
+              }
+            }
+          },
     });
 
 

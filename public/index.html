@@ -27,7 +27,7 @@
     <section v-if="currentPage === 'inscription'" id="inscription">
         <inscription
                 v-on:change-page="changePage($event)"
-                v-on:inscription="inscription()"
+                v-on:inscription="inscription($event)"
         ></inscription>
     </section>
 

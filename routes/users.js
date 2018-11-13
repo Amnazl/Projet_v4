@@ -78,8 +78,8 @@ router.post('/register',function(req,res){
 
             if(isNotValide){
                 req.flash('error_msg',"Nom d'utilisateur déjà utilisé");
-                //res.redirect('/users/register');
             }else{
+                console.log("2");
                 bcrypt.genSalt(10, function(err, salt) {
                     bcrypt.hash(newUser.password, salt, function(err, hash) {
                         newUser.password = hash;
@@ -87,10 +87,10 @@ router.post('/register',function(req,res){
                         data.users.push(newUser);
                         fs.writeFile('./users.json', JSON.stringify(data,null,2), 'utf-8', function(err) {
                             if(err){
-                                req.flash('error_msg',"Ajout utilisateur impossible");
+                                res.status(200).send('L\'inscription a echoué');
                             }else{
-                                req.flash('succes_msg','Tu es inscris, tu peux maintenant aller te connecter');
-                                //res.redirect('/users/login');
+                                res.status(200).send('L\'inscription est un succès');
+
                             }
                         })
                     });
@@ -98,8 +98,6 @@ router.post('/register',function(req,res){
 
             }
         })
-
-   // }
 });
 
 checkUser = function(username,data){
