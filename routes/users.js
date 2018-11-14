@@ -16,13 +16,24 @@ var username_global;
 	return []
 }*/
 
-router.get('/comments/:username', (req, res) => {
-    //console.log('gjrkegjrkejgkrejgkre')
+router.get('/:username/comments/user', (req, res) => {
     var username = req.params.username;
+    console.log(username);
     res.json(Comment.getCommentByUsername(username, function(err, data) {
         console.log(data);
+        //req.send(data);
     }));
-})
+});
+
+
+router.get('/:idArticle/comments/article', (req, res) => {
+    var id_article = req.params.idArticle;
+    console.log(id_article);
+    res.json(Comment.getCommentByArticle(id_article, function(err, data) {
+        console.log(data);
+        //req.send(data);
+    }));
+});
 
 router.get('/register',function(req,res){
     res.render('register');
@@ -37,36 +48,22 @@ router.get('/',function(req,res){
     res.render('index');
 });
 
-router.get('/user', function(req, res){
-    //var u = req.user.toString();
-    console.log(username_global);
-    res.send(username_global);
-})
+
+router.get('/user', (req, res, next) => {
+
+    console.log(req.session);
+    if(req.session.user){
+        res.json(req.session.user.username)
+    }
+});
 
 
 router.post('/register',function(req,res){
     console.log("Une requete post est en cours..");
     var name = req.body.name;
-    var email = req.body.email;
     var username = req.body.username;
     var password = req.body.password;
     var password2 = req.body.password2;
-   // username_global = req.body.username;
-    //validation
-
-    /*req.checkBody('name', 'Name is required').notEmpty();
-    req.checkBody('email', 'Email is required').notEmpty();
-    req.checkBody('email', 'Email is not valid').isEmail();
-    req.checkBody('username', 'Username is required').notEmpty();
-    req.checkBody('password', 'Password is required').notEmpty();
-    req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
-
-    var errors = req.validationErrors();
-    if(errors){
-        res.render('register',{
-            errors:errors
-        });
-    } else {*/
     	var newUser = new User({
             name: name,
             username: username,
@@ -80,7 +77,6 @@ router.post('/register',function(req,res){
 
             if(isNotValide){
                 res.send("Nom d'utilisateur déjà utilisé");
-                //req.flash('error_msg',"Nom d'utilisateur déjà utilisé");
             }else{
                 //console.log("2");
                 bcrypt.genSalt(10, function(err, salt) {
@@ -92,9 +88,8 @@ router.post('/register',function(req,res){
                             if(err){
                                 res.send('Inscription a echoué');
                             }else{
-                              // res.status(2).send("ss");
+
                                res.send('Inscription réussi');
-                                //res.status().send
 
                             }
                         })
@@ -138,12 +133,9 @@ passport.use(new LocalStrategy(
                     return done(null, false, { message: 'Mauvais mot de passe' });
                 }
             });
-            //console.log(user);
-            //return done(null,user);
         });
     }));
 passport.serializeUser(function (user, done) {
-    //console.log(user._id);
     done(null,user._id);
 });
 
@@ -154,49 +146,69 @@ passport.deserializeUser(function (id, done) {
 });
 
 
-
-
-router.post('/login',
+/*router.post('/login',
     passport.authenticate('local', { failureRedirect: '/users/error'}),
     function(req, res){
 
 
         if(req.user !== 'undefined'){
-            console.log(req.user);
-            res.send(req.user);
+
+            var user = req.user;
+            console.log(user.username);
+            req.session.user =user;
+            res.json({id: user._id, username: user.username})
         }else{
             console.log("pas user");
-            res.status(201).send();
+            res.status(200).send();
         }
 
-       //res.send(req.data);
+    });
+*/
+
+router.post('/login', (req, res, next) => {
+    var username = req.body.username;
+    var password = req.body.password;
+    console.log(req.body);
+
+    var u = '';
+    User.getUserByUsername(username, (err, user) =>  {
+        if (err) throw err;
+        if (user){
+            u = user;
+            if(u){
+                User.comparePassword(password, u.password, function (err, isMatch) {
+                    if (err) throw err;
+                    if (isMatch) {
+                        req.session.user = u;
+                        res.json({id: u._id, username: u.username});
+                    } else {
+                        res.send('');
+                    }
+                });
+            }else{
+
+                res.send('');
+            }
+        }else{
+            res.send('');
+        }
 
     });
 
+});
 
-/*router.get('/succes',function (req, res) {
-    console.log("2"+req.user);
-    res.send(req.user);
-
-});*/
 
 router.get('/error',function (req, res) {
-    console.log("ddd");
     res.send('Connexion impossible');
 
 });
 
 
 
-
-
-router.get('/logout', function (req, res) {
-    //req.logout();
-    username_global = '';
-    //req.flash('success_msg', 'Tu es déconnecté');
-
-    //res.redirect('/users/login');
-    res.status(200).send();
+router.get('/logout', (req, res, next) => {
+    req.session.destroy(function (err){
+        res.status(200).send('Logout')
+    })
 });
 
 

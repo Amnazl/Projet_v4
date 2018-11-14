@@ -133,7 +133,7 @@
           <h1>Connexion</h1>
 
         <div class="composantsConnexion" >
-          <input id="identifiant" type="text" v-model="identifiantsUser.username" name="username" placeholder="Identifiant (email)">
+          <input id="identifiant" type="text" v-model="identifiantsUser.username" name="username" placeholder="Identifiant (username)">
         </div>
         <div class="composantsConnexion" >
           <input id="motDePasse" type="password" v-model="identifiantsUser.password" name="password" placeholder="Mot de passe">
@@ -253,7 +253,7 @@
           <span class="glyphicon glyphicon-chevron-right"></span>
           <span class="sr-only">Suivant</span>
         </a>
-    </div>user
+    </div>
 
     <div id="containerArticles">
         

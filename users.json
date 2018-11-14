@@ -19,28 +19,10 @@
       "password": "$2a$10$fKSQJ5RW8jK6yNzeevDu/ucV1G8NVMmpp2ICd7DLFFia/rel5vYcq"
     },
     {
-      "_id": "5bead5aa2502775879576f1d",
-      "name": "Ilyess MAROUF",
-      "username": "test",
-      "password": "$2a$10$cVeX9cLL8b.4PehrnLayjOD1tK3dNYU/99wtb3C0VgDfRa/I3NsX2"
-    },
-    {
-      "_id": "5bead60a9bb29d58d2d106a2",
-      "name": "ilyess MAROUF",
-      "username": "kdkd",
-      "password": "$2a$10$mLZovfuQJ7pZWuhS2.WeR.2lGzAV70Ptp6OS9xaNqHXl6iaNTVjrq"
-    },
-    {
-      "_id": "5beaddf6e251295de85285f3",
-      "name": "ilyess MAROUF",
-      "username": "maroufd",
-      "password": "$2a$10$VfJCT82jKXsKhIzP5pw3IOyNJyxd7kNmYegIHroQdgf383iwx/xDm"
-    },
-    {
-      "_id": "5beade5952f2ee5e3af15328",
+      "_id": "5bec96d5bc5d623eeadfe8ff",
       "name": "admin",
-      "username": "maroujxxxdd",
-      "password": "$2a$10$tfrkMHFCoiqm0/YdyjexAu7wg7NvRgDY5iZKjGtbHL6ns1Xwml772"
+      "username": "admin1",
+      "password": "$2a$10$Fa.U9Es6tRG/HXZJoinjF.qBDVa5E2MMZvK.cGjHVPVq.It53eGqm"
     }
   ]
 }

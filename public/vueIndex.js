@@ -1,4 +1,7 @@
-Vue.prototype.$http = axios
+axios.defaults.withCredentials = true;
+Vue.prototype.$http = axios;
+
+
 const app = new Vue({
   el: '#app',
   data: {
@@ -7,29 +10,18 @@ const app = new Vue({
 
   },
   created () {
-
-     // alert("tess");
-    // Ici, l'utilisation d'une fonction flêchée () => {} plutôt que function () {} est primordial !
-    // sans fonction fléchée, this.myList = ... ne fonctionnera pas comme prévu
-    this.$http.get('/users/user').then((req) => {
-        if(req.data !== null){
-            this.username = req.data;
-        }
-    });
+      this.$http.get('/users/user')
+          .then(user => {
+              //alert("ca passe");
+              if(user.data){
+                  this.username = user.data;
+              }
+          })
+          .catch(err => {
+              console.log('error', err)
+          })
   },
   methods: {
-    /*sendNewElement () {
-      this.$http.post('/users/login', {
-        username : this.username,
-        password : this.password,
-      })
-        .then(() => {
-          this.myList.push({
-            name: this.name
-          })
-        })
-    },*/
-
     changePage (page) {
       this.currentPage = page;
     },
@@ -59,13 +51,16 @@ const app = new Vue({
 
 
       connexionUser(identifiantsUser){
-        this.$http.post('/users/login', identifiantsUser).then((req) => {
 
-            if(req.data === 'Connexion impossible'){
-                alert("Connexion impossible");
+        this.$http.post('/users/login', identifiantsUser,{
+            withCredentials : true,
+            method : 'POST',
+      }).then((req) => {
+            if(req.data === ''){
+
+                alert("Connexion impossible : Login ou Mot de passe mauvais.");
             }else{
-                this.username = req.data;
-                alert("login :"+ req.data);
+                this.username = req.data.username;
                 this.changePage('index');
             }
         })
@@ -76,12 +71,17 @@ const app = new Vue({
             this.username = '';
             this.changePage('index');
         })
+      },
+
+
+      getCommentByUsername(){
+          this.$http.get('/users/'+this.username+'/comments/article').then(listOfComments => {
+              //this.username = '';
+              console.log(listOfComments);
+              //this.changePage('index');
+          })
+
       }
-
-
-
-
-
 
   }
 })
