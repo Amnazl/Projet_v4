@@ -16,13 +16,14 @@
 <main id="app" class="container">
     <navigation-bar
         v-on:change-page="changePage($event)"
-        v-if="statut === 'user'"
+        v-on:deconnexion="logout($event)"
+        v-bind:username="username"
     ></navigation-bar>
 
-    <navigation-bar-invite
+    <!--<navigation-bar-invite
         v-on:change-page="changePage($event)"
         v-if="statut === 'invite'"
-    ></navigation-bar-invite>
+    ></navigation-bar-invite>-->
 
     <section v-if="currentPage === 'inscription'" id="inscription">
         <inscription

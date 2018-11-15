@@ -1,7 +1,7 @@
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 var exphbs = require('express-handlebars');
 var expressValidator = require('express-validator');
 var flash = require('connect-flash');
@@ -9,6 +9,7 @@ var session = require('express-session');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var fs = require('fs');
+var cors = require('cors');
 
 var cons = require('consolidate');
 
@@ -45,6 +46,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+
 // Set Static folder
 
 
@@ -53,9 +55,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Express Session
 app.use(session({
     secret: 'secret',
-    saveUninitialized: true,
-    resave: true
+    /*saveUninitialized: true,
+    resave: true,
+    cookie: { secure: true},*/
 }));
+
+
+//app.use(cors());
 
 // Passport init
 app.use(passport.initialize());
@@ -78,6 +84,8 @@ app.use(expressValidator({
     };
   }
 }));
+
+
 
 //Connect Flash 
 

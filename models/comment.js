@@ -78,7 +78,8 @@ module.exports.deleteComment = function(id_comment){
 
 module.exports.getCommentByUsername = function(username, callback){
 
-    fs.readFile('commentaires.json', 'utf-8', function(err, data) {
+    fs.readFile('comments.json', 'utf-8', function(err, data) {
+
         data = JSON.parse(data);
         for(i = 0; i < data.comments.length; i++){
             if(data.comments[i].username != username){
@@ -109,7 +110,7 @@ async function getrhjeghjrehgkre (req, res) {
 
 
 module.exports.getCommentByArticle = function(id_article, callback){
-    fs.readFile('commentaires.json', 'utf-8', function(err, data) {
+    fs.readFile('comments.json', 'utf-8', function(err, data) {
         data = JSON.parse(data);
         for(i = 0; i < data.comments.lenght; i++){
             if(!(data.comments[i].id_article === id_article)){
