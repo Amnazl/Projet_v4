@@ -75,7 +75,17 @@ const app = new Vue({
 
 
       getCommentByUsername(){
-          this.$http.get('/users/'+this.username+'/comments/article').then(listOfComments => {
+          this.$http.get('/users/'+this.username+'/comments/user').then(listOfComments => {
+              //this.username = '';
+              console.log(listOfComments);
+              //this.changePage('index');
+          })
+
+      },
+
+
+      getCommentByArticle(idArticle){
+          this.$http.get('/users/'+idArticle+'/comments/article').then(listOfComments => {
               //this.username = '';
               console.log(listOfComments);
               //this.changePage('index');

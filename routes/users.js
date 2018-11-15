@@ -21,6 +21,7 @@ router.get('/:username/comments/user', (req, res) => {
     console.log(username);
     res.json(Comment.getCommentByUsername(username, function(err, data) {
         console.log(data);
+        req.json(data);
         //req.send(data);
     }));
 });
@@ -31,6 +32,7 @@ router.get('/:idArticle/comments/article', (req, res) => {
     console.log(id_article);
     res.json(Comment.getCommentByArticle(id_article, function(err, data) {
         console.log(data);
+        res.json(data);
         //req.send(data);
     }));
 });
