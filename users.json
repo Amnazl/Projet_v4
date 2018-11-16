@@ -23,6 +23,18 @@
       "name": "admin",
       "username": "admin1",
       "password": "$2a$10$Fa.U9Es6tRG/HXZJoinjF.qBDVa5E2MMZvK.cGjHVPVq.It53eGqm"
+    },
+    {
+      "_id": "5bedb0a1e8cfaf5dda0c969b",
+      "name": "administrateur",
+      "username": "administrateur",
+      "password": "$2a$10$apz9o3Hcjc6VfmftHpQzmOfVXSvmICZLBRgGVXceOIih1AfLEhnii"
+    },
+    {
+      "_id": "5beef5dfa1bbf7636ade8246",
+      "name": "aminetest",
+      "username": "aminetest",
+      "password": "$2a$10$auU86.1AeYCnWqTsXQLI2OVhPzx8QKWm8q6li0.ojEzT2QA7h9VQC"
     }
   ]
 }

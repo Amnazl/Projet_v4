@@ -3,14 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>NEWS</title>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  
+
     <link href="./css/style_newsWebsite.css" rel="stylesheet" />
+
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+
 </head>
 <body>
 <main id="app" class="container">
@@ -20,10 +23,6 @@
         v-bind:username="username"
     ></navigation-bar>
 
-    <!--<navigation-bar-invite
-        v-on:change-page="changePage($event)"
-        v-if="statut === 'invite'"
-    ></navigation-bar-invite>-->
 
     <section v-if="currentPage === 'inscription'" id="inscription">
         <inscription
@@ -44,6 +43,12 @@
     <section v-if="currentPage === 'liste-articles'">
         <liste-articles v-on:change-page="changePage($event)" ></liste-articles>
     </section>
+
+    <section v-if="currentPage === 'mon-compte'">
+        <mon-compte v-on:change-page="changePage($event)"></mon-compte>
+    </section>
+
+
     
 
     <section v-if="currentPage === 'contact'">
@@ -51,51 +56,86 @@
     </section>
 
     <section v-if="currentPage === 'article1'">
-        <article1></article1>
+        <article1 v-bind:username="username"
+                  v-on:change-page="changePage($event)"
+                  v-on:connexion-user="connexionUser($event)"
+                  v-on:poster-commentaire="getCommentByArticle($event)"></article1>
     </section>
 
     <section v-if="currentPage === 'article2'">
-        <article2></article2>
+        <article2 v-bind:username="username"
+                  v-on:change-page="changePage($event)"
+                  v-on:connexion-user="connexionUser($event)"
+                  v-on:poster-commentaire="getCommentByArticle($event)"></article2>
     </section>
 
     <section v-if="currentPage === 'article3'">
-        <article3></article3>
+        <article3 v-bind:username="username"
+                  v-on:change-page="changePage($event)"
+                  v-on:connexion-user="connexionUser($event)"
+                  v-on:poster-commentaire="getCommentByArticle($event)"></article3>
     </section>
 
     <section v-if="currentPage === 'article4'">
-        <article4></article4>
+        <article4 v-bind:username="username"
+                  v-on:change-page="changePage($event)"
+                  v-on:connexion-user="connexionUser($event)"
+                  v-on:poster-commentaire="getCommentByArticle($event)"></article4>
     </section>
 
     <section v-if="currentPage === 'article5'">
-        <article5></article5>
+        <article5 v-bind:username="username"
+                  v-on:change-page="changePage($event)"
+                  v-on:connexion-user="connexionUser($event)"
+                  v-on:poster-commentaire="getCommentByArticle($event)"></article5>
     </section>
 
     <section v-if="currentPage === 'article6'">
-        <article6></article6>
+        <article6 v-bind:username="username"
+                  v-on:change-page="changePage($event)"
+                  v-on:connexion-user="connexionUser($event)"
+                  v-on:poster-commentaire="getCommentByArticle($event)"></article6>
     </section>
 
     <section v-if="currentPage === 'article7'">
-        <article7></article7>
+        <article7 v-bind:username="username"
+                  v-on:change-page="changePage($event)"
+                  v-on:connexion-user="connexionUser($event)"
+                  v-on:poster-commentaire="getCommentByArticle($event)"></article7>
     </section>
 
     <section v-if="currentPage === 'article8'">
-        <article8></article8>
+        <article8 v-bind:username="username"
+                  v-on:change-page="changePage($event)"
+                  v-on:connexion-user="connexionUser($event)"
+                  v-on:poster-commentaire="getCommentByArticle($event)"></article8>
     </section>
 
     <section v-if="currentPage === 'article9'">
-        <article9></article9>
+        <article9 v-bind:username="username"
+                  v-on:change-page="changePage($event)"
+                  v-on:connexion-user="connexionUser($event)"></article9>
     </section>
 
     <section v-if="currentPage === 'article10'">
-        <article10></article10>
+        <article10 v-bind:username="username"
+                   v-on:change-page="changePage($event)"
+                   v-on:connexion-user="connexionUser($event)"
+                   v-on:poster-commentaire="getCommentByArticle($event)"></article10>
     </section>
 
     <section v-if="currentPage === 'article15'">
-        <article15></article15>
+        <article15 v-bind:username="username"
+                   v-on:change-page="changePage($event)"
+                   v-on:connexion-user="connexionUser($event)"
+                   v-on:poster-commentaire="getCommentByArticle($event)"></article15>
     </section>
 
     <section v-if="currentPage === 'article16'">
-        <article16></article16>
+        <article16 v-bind:username="username"
+                   v-on:change-page="changePage($event)"
+                   v-on:connexion-user="connexionUser($event)"
+                   v-on:poster-commentaire="getCommentByArticle($event)"></article16>
     </section>
     
     

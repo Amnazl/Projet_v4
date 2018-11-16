@@ -21,7 +21,7 @@
                 </li>
 
                 <li class="nav-item">
-                     <li> <a class="nav-link" @click="$emit('change-page', 'moncompte')">Mon compte</a></li>
+                     <li> <a class="nav-link" v-if="username !== ''" @click="$emit('change-page', 'mon-compte')">Mon compte</a></li>
                 </li>
                 
                 <li class="nav-item">
@@ -31,8 +31,9 @@
 
 
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="navbar-nav navbar-right">
                 <li class="nav-item">
+                    <li> <a class="nav-link" v-if="username !== ''">Bienvenue {{username}}  | </a></li>
                     <li> <a class="nav-link" v-if="username === ''" @click="$emit('change-page', 'connexion')">Connexion</a></li>
                     <li> <a class="nav-link" v-if="username !== ''" @click="$emit('deconnexion')">Deconnexion</a></li>
                 </li>
@@ -42,87 +43,6 @@
     `
     });
 
-    Vue.component('navigation-bar-invite', {
-
-        template : `
-
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="/"><img src="images/logo.png" alt="logo"></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" @click="$emit('change-page', 'index')">Accueil </a>
-                </li>
-                <li class="nav-item">
-                    <li> <a class="nav-link" @click="$emit('change-page', 'liste-articles')">Articles</a></li>
-                </li>
-                
-                <li class="nav-item">
-                     <li> <a class="nav-link" @click="$emit('change-page', 'contact')">Contact</a></li>
-                </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                <li class="nav-item">
-                    <li> <a class="nav-link" @click="$emit('change-page', 'connexion')">Connexion</a></li>
-                </li>
-            </ul>
-            </div>
-    </nav>
-    `
-    });
-
-
-    /*Vue.component('inscription-form', {
-
-        template : `
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h1 class="modal-title">Inscription </h1>
-        </div>
-        <div class="panel-body">
-            <form>
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <label>Login</label>
-                        <input type="text" class="form-control mesinputs"  v-model="user.login" placeholder="Login">
-                    </div>
-                </div>
-    
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label>Mot de passe</label>
-                        <input type="password" class="form-control"  v-model="user.password" placeholder="Mot de passe">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label>Repéter le mot de passe</label>
-                        <input type="password" class="form-control" v-model="user.repeatpassword"  placeholder="Mot de passe">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <a @click="$emit('inscriptionuser', user)" class="btn btn-primary" role="button">S'inscrire </a>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-    
-    
-    `,
-      data: function () {
-        return {
-          user : {
-            'login' : '',
-            'password' :'',
-            'repeatpassword' : ''
-          }
-        }
-      },
-    });
-  */
     Vue.component('connexion', {
         template: `
     
@@ -130,7 +50,7 @@
 
       <form id=formulaireConnexion>
 
-          <h1>Connexion</h1>
+          <h1 style="margin-left : 25%; margin-right: 25%;">Connexion</h1>
 
         <div class="composantsConnexion" >
           <input id="identifiant" type="text" v-model="identifiantsUser.username" name="username" placeholder="Identifiant (username)">
@@ -145,7 +65,6 @@
           <b>Pas encore inscrit ? </b> <u><a@click="$emit('change-page', 'inscription')">Inscription</a></u>
         </div>
         <div class="composantsConnexion" id="invite_connexion">
-          <a @click="$emit('change-page', 'index')">Se connecter en invité</a>
         </div>
       </form>
       
@@ -167,6 +86,10 @@
         template: `
     
         <div id=monForm>
+        
+            <label id="titreInscription"> Inscription </label>
+            
+             <hr class="style2">            
     
             <div class="form-group">
                 <label for="Nom">Nom :</label>
@@ -187,7 +110,7 @@
                 <label for="Password2">Mot de passe (vérification) :</label>
                 <input type="password" class="form-control" id="Password2" name="password2" v-model="dataInscriptionUser.password2" placeholder="Veuillez ressaisir votre mot de passe" required="required">
             </div>
-            <a class="btn btn-primary" @click="$emit('inscription', dataInscriptionUser)">Submit</a>
+            <a class="btn btn-primary" @click="$emit('inscription', dataInscriptionUser)">S'inscrire</a>
         </div>`,
 
           data: function() {
@@ -266,7 +189,7 @@
                 <a @click="$emit('change-page', 'article1')"">
                     <img class="imgArticlesGauche" src="images/article1.jpg" alt="article1" width="300" height="250">
                     <label class="titre" id="titreArticle1">
-                            <b>userComment la 5G va-t-elle changer nos vies ?</b>
+                            <b>Comment la 5G va-t-elle changer nos vies ?</b>
                     </label>
                 </a>
                 
@@ -532,7 +455,59 @@
     });
 
 
-  Vue.component('article1',{
+    Vue.component('mon-compte', {
+        template: `
+      
+ 
+        <div id="containerMonCompte"> 
+        
+            <label id="titreMonCompte">
+              Mon compte
+            </label>
+            
+            <hr class="style2">
+            
+            <hr/>
+
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Id Article</th>
+                  <th scope="col">Commentaire</th>
+                  <th scope="col">Date de dernière modification</th>
+                  <th scope="col">Modification</th>
+                  <th scope="col">Suppression</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Mark</td>
+                  <td>Otto</td>
+                  <td>@mdo</td>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <td>Jacob</td>
+                  <td>Thornton</td>
+                  <td>@fat</td>
+                </tr>
+                <tr>
+                  <th scope="row">3</th>
+                  <td>Larry</td>
+                  <td>the Bird</td>
+                  <td>@twitter</td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+      `
+    });
+
+
+
+    Vue.component('article1',{
+        props : ['username'],
       template: `
         
         <div id="containerArticleEntier">
@@ -582,12 +557,12 @@
           </div>
 
           <main id="saisieCommentaire">
-              <div id="commentaire">
+              <div id="commentaire" v-if="username === ''">
                   <img src="images/warning.png" width="40" height="40">
-                  Pour écrire un commentaire vous devez être connecté. <a href="authentification.html">Se connecter</a>
+                  Pour écrire un commentaire vous devez être connecté. <a @click="$emit('change-page', 'connexion')">Se connecter</a>
               </div>
 
-              <div >
+              <div v-if="username !== ''">
                   <div id="listeCommentaire"></div>
 
                   <br />
@@ -595,7 +570,7 @@
                       <label id="labelCommentaire" for="labelCommentaire">Commentaire : </label>
                       <textarea class="form-control rounded-0" id="commentaireUserText" rows="10"></textarea>
                       <br />
-                      <button type="submit" id="submit" name="submit" class="btn btn-primary pull-right">Ajouter</button>
+                      <a role="button" class="btn btn-primary pull-right" @click="$emit('poster-commentaire', '1')">Ajouter</a>
                   </div>
               </div>
               
@@ -606,7 +581,9 @@
     });
 
 
-  Vue.component('article2',{
+    Vue.component('article2',{
+        props : ['username'],
+
       template: `
         
         <div id="containerArticleEntier">
@@ -669,12 +646,12 @@
         </div>
 
         <main id="saisieCommentaire">
-                <div id="commentaire">
+                <div id="commentaire" v-if="username === ''">
                     <img src="images/warning.png" width="40" height="40">
-                    Pour écrire un commentaire vous devez être connecté. <a href="authentification.html">Se connecter</a>
+                    Pour écrire un commentaire vous devez être connecté. <a @click="$emit('change-page', 'connexion')">Se connecter</a>
                 </div>
     
-                <div>
+                <div v-if="username !== ''">
                     <div id="listeCommentaire"></div>
     
                     <br />
@@ -682,7 +659,7 @@
                         <label id="labelCommentaire" for="labelCommentaire">Commentaire : </label>
                         <textarea class="form-control rounded-0" id="commentaireUserText" rows="10"></textarea>
                         <br />
-                        <button type="submit" id="submit" name="submit" class="btn btn-primary pull-right">Ajouter</button>
+                        <a role="button" class="btn btn-primary pull-right" @click="$emit('poster-commentaire', '2')">Ajouter</a>
                     </div>
                 </div>
                 
@@ -691,77 +668,49 @@
       `
     });
 
-  Vue.component('article3',{
+    Vue.component('article3',{
+        props : ['username'],
       template: `
-        
         <div id="containerArticleEntier">
         <label id="titreArticleEntier">
-            Un adolescent qui a piraté Apple pendant plus d’un an passe en justice
+            Russie : le plus haut gratte-ciel d’Europe bientôt terminé !
         </label>
         <img id="imageArticle" src="images/article3.jpg " width="600" height="250" style="margin-left : 24%;">
         <br /> <br />
         <div id="texteArticle">
 
-            &nbsp&nbsp&nbsp Situé dans la ville de Saint-Pétersbourg, le Lakhta Center dépassera les 400 mètres de
-            hauteur.
-            L’édifice a été commandé par le géant de l’énergie russe Gazprom qui y installera ses locaux.
-            Il s’agira alors de la plus grande tour du continent européen, mais elle sera en revanche exclue du Top 10
-            mondial !
-
+            &nbsp&nbsp&nbsp Situé dans la ville de Saint-Pétersbourg, le Lakhta Center dépassera les 400 mètres de hauteur. L’édifice a été commandé par le géant de l’énergie russe Gazprom qui y installera ses locaux. Il s’agira alors de la plus grande tour du continent européen, mais elle sera en revanche exclue du Top 10 mondial !
 
             <br /><br />
-            &nbsp&nbsp&nbsp Pour l’instant, la plus haute tour d’Europe se trouve déjà en Russie. Il s’agit du Complexe
-            de la Fédération (ou Vostok Tower) situé dans la capitale Moscou. Achevé en 2015, ce gratte-ciel culmine
-            à 373 mètres de hauteur. Dans quelques semaines, une autre construction lui ravira ce titre :
-            le Lakhta Center de Saint-Pétersbourg et ses 462 mètres.
+
+            &nbsp&nbsp&nbsp Pour l’instant, la plus haute tour d’Europe se trouve déjà en Russie. Il s’agit du Complexe de la Fédération (ou Vostok Tower) situé dans la capitale Moscou. Achevé en 2015, ce gratte-ciel culmine à 373 mètres de hauteur. Dans quelques semaines, une autre construction lui ravira ce titre : le Lakhta Center de Saint-Pétersbourg et ses 462 mètres.
 
             <br /><br />
-            &nbsp&nbsp&nbsp Selon la page officielle du projet, il s’agira par ailleurs du premier « supertall
-            building »
-            (plus de 300 mètres de haut) de la ville historique de Saint-Pétersbourg, mais également du treizième
-            bâtiment
-            le plus grand du monde. Il sera situé dans le classement juste entre l’International Commerce Center de
-            Hong Kong
-            (2010 – 484 m) et le Landmark 81 de Hô Chi Minh-Ville au Vietnam (2018 – 461,2 m).
+
+            &nbsp&nbsp&nbsp Selon la page officielle du projet, il s’agira par ailleurs du premier « supertall building » (plus de 300 mètres de haut) de la ville historique de Saint-Pétersbourg, mais également du treizième bâtiment le plus grand du monde. Il sera situé dans le classement juste entre l’International Commerce Center de Hong Kong (2010 – 484 m) et le Landmark 81 de Hô Chi Minh-Ville au Vietnam (2018 – 461,2 m).
 
             <br /><br />
-            &nbsp&nbsp&nbsp Le Lakhta Center est doté de 87 étages, alors que son design extérieur rappelle celui
-            d’une sorte de crayon tordu. Il faut savoir que ses fondations ont été enfouies à plus de 80 mètres sous
-            terre,
-            et que la structure a été renforcée par une quinzaine de colonnes. Il s’agit ici de permettre au bâtiment
-            de
-            résister à des vents d’environ 135 km/h au niveau de son sommet.
+
+            &nbsp&nbsp&nbsp Le Lakhta Center est doté de 87 étages, alors que son design extérieur rappelle celui d’une sorte de crayon tordu. Il faut savoir que ses fondations ont été enfouies à plus de 80 mètres sous terre, et que la structure a été renforcée par une quinzaine de colonnes. Il s’agit ici de permettre au bâtiment de résister à des vents d’environ 135 km/h au niveau de son sommet.
 
             <br /><br />
-            &nbsp&nbsp&nbsp Également, le gratte-ciel sera doté de pas moins de 16 500 vitres. Elles seront toutes
-            équipées
-            de volets automatiques dont le but est de réduire les pertes de chaleur. Une autre propriété a dimension
-            écologique
-            sera également présente : un système de réutilisation et de purification de l’eau.
+
+            &nbsp&nbsp&nbsp Également, le gratte-ciel sera doté de pas moins de 16 500 vitres. Elles seront toutes équipées de volets automatiques dont le but est de réduire les pertes de chaleur. Une autre propriété a dimension écologique sera également présente : un système de réutilisation et de purification de l’eau.
 
             <br /><br />
-            &nbsp&nbsp&nbsp Prévue pour 2019, l’inauguration du Lakhta Center précédera l’installation du nouveau siège
-            social
-            de la société Gazprom, le célèbre géant de l’énergie russe alimentant de nombreux pays européens.
 
-            <br /><br />
-            &nbsp&nbsp&nbsp &nbsp&nbsp&nbsp Le journal australien The Age a rapporté un fait divers troublant ce jeudi
-            16 août 2018.
-            Un adolescent a pendant plus d’un an circulé dans le système central d’Apple. L’année dernière,
-            la police aurait finalement fait une descente chez lui pour saisir son matériel et l’inculper. L’affaire va
-            se
-            résoudre le mois prochain devant le tribunal fédéral.
+            &nbsp&nbsp&nbsp Prévue pour 2019, l’inauguration du Lakhta Center précédera l’installation du nouveau siège social de la société Gazprom, le célèbre géant de l’énergie russe alimentant de nombreux pays européens.
 
             <br /><br />
         </div>
 
         <main id="saisieCommentaire">
-                <div id="commentaire">
+                <div id="commentaire" v-if="username === ''">
                     <img src="images/warning.png" width="40" height="40">
-                    Pour écrire un commentaire vous devez être connecté. <a href="authentification.html">Se connecter</a>
+                    Pour écrire un commentaire vous devez être connecté. <a @click="$emit('change-page', 'connexion')">Se connecter</a>
                 </div>
     
-                <div>
+                <div v-if="username !== ''">
                     <div id="listeCommentaire"></div>
     
                     <br />
@@ -769,18 +718,19 @@
                         <label id="labelCommentaire" for="labelCommentaire">Commentaire : </label>
                         <textarea class="form-control rounded-0" id="commentaireUserText" rows="10"></textarea>
                         <br />
-                        <button type="submit" id="submit" name="submit" class="btn btn-primary pull-right">Ajouter</button>
+                        <a role="button" class="btn btn-primary pull-right" @click="$emit('poster-commentaire', '3')">Ajouter</a>
                     </div>
                 </div>
                 
-            </main>
+        </main>
     </div>
       `
     });
 
 
 
-  Vue.component('article4',{
+    Vue.component('article4',{
+        props : ['username'],
       template: `
         
         <div id="containerArticleEntier">
@@ -838,12 +788,12 @@
         </div>
 
         <main id="saisieCommentaire">
-                <div id="commentaire">
+                <div id="commentaire" v-if="username === ''">
                     <img src="images/warning.png" width="40" height="40">
-                    Pour écrire un commentaire vous devez être connecté. <a href="authentification.html">Se connecter</a>
+                    Pour écrire un commentaire vous devez être connecté. <a @click="$emit('change-page', 'connexion')">Se connecter</a>
                 </div>
     
-                <div>
+                <div v-if="username !== ''">
                     <div id="listeCommentaire"></div>
     
                     <br />
@@ -851,7 +801,7 @@
                         <label id="labelCommentaire" for="labelCommentaire">Commentaire : </label>
                         <textarea class="form-control rounded-0" id="commentaireUserText" rows="10"></textarea>
                         <br />
-                        <button type="submit" id="submit" name="submit" class="btn btn-primary pull-right">Ajouter</button>
+                        <a role="button" class="btn btn-primary pull-right" @click="$emit('poster-commentaire', '4')">Ajouter</a>
                     </div>
                 </div>
                 
@@ -862,7 +812,8 @@
 
 
 
-  Vue.component('article5',{
+    Vue.component('article5',{
+        props : ['username'],
       template: `
         
         <div id="containerArticleEntier">
@@ -920,12 +871,12 @@
         </div>
 
         <main id="saisieCommentaire">
-                <div id="commentaire">
+                <div id="commentaire" v-if="username === ''">
                     <img src="images/warning.png" width="40" height="40">
-                    Pour écrire un commentaire vous devez être connecté. <a href="authentification.html">Se connecter</a>
+                    Pour écrire un commentaire vous devez être connecté. <a @click="$emit('change-page', 'connexion')">Se connecter</a>
                 </div>
     
-                <div>
+                <div v-if="username !== ''">
                     <div id="listeCommentaire"></div>
     
                     <br />
@@ -933,7 +884,7 @@
                         <label id="labelCommentaire" for="labelCommentaire">Commentaire : </label>
                         <textarea class="form-control rounded-0" id="commentaireUserText" rows="10"></textarea>
                         <br />
-                        <button type="submit" id="submit" name="submit" class="btn btn-primary pull-right">Ajouter</button>
+                        <a role="button" class="btn btn-primary pull-right" @click="$emit('poster-commentaire', '5')">Ajouter</a>
                     </div>
                 </div>
                 
@@ -943,7 +894,8 @@
 
 
 
-  Vue.component('article6',{
+    Vue.component('article6',{
+        props : ['username'],
       template: `
         
         <div id="containerArticleEntier">
@@ -1003,12 +955,12 @@
         </div>
 
         <main id="saisieCommentaire">
-                <div id="commentaire">
+                <div id="commentaire" v-if="username === ''">
                     <img src="images/warning.png" width="40" height="40">
-                    Pour écrire un commentaire vous devez être connecté. <a href="authentification.html">Se connecter</a>
+                    Pour écrire un commentaire vous devez être connecté. <a @click="$emit('change-page', 'connexion')">Se connecter</a>
                 </div>
     
-                <div>
+                <div v-if="username !== ''">
                     <div id="listeCommentaire"></div>
     
                     <br />
@@ -1016,7 +968,7 @@
                         <label id="labelCommentaire" for="labelCommentaire">Commentaire : </label>
                         <textarea class="form-control rounded-0" id="commentaireUserText" rows="10"></textarea>
                         <br />
-                        <button type="submit" id="submit" name="submit" class="btn btn-primary pull-right">Ajouter</button>
+                        <a role="button" class="btn btn-primary pull-right" @click="$emit('poster-commentaire', '6')">Ajouter</a>
                     </div>
                 </div>
                 
@@ -1026,7 +978,8 @@
     });
 
 
-  Vue.component('article7',{
+    Vue.component('article7',{
+        props : ['username'],
       template: `
         
         <div id="containerArticleEntier">
@@ -1087,12 +1040,12 @@
         </div>
 
         <main id="saisieCommentaire">
-                <div id="commentaire">
+                <div id="commentaire" v-if="username === ''">
                     <img src="images/warning.png" width="40" height="40">
-                    Pour écrire un commentaire vous devez être connecté. <a href="authentification.html">Se connecter</a>
+                    Pour écrire un commentaire vous devez être connecté. <a @click="$emit('change-page', 'connexion')">Se connecter</a>
                 </div>
     
-                <div>
+                <div v-if="username !== ''">
                     <div id="listeCommentaire"></div>
     
                     <br />
@@ -1100,7 +1053,7 @@
                         <label id="labelCommentaire" for="labelCommentaire">Commentaire : </label>
                         <textarea class="form-control rounded-0" id="commentaireUserText" rows="10"></textarea>
                         <br />
-                        <button type="submit" id="submit" name="submit" class="btn btn-primary pull-right">Ajouter</button>
+                        <a role="button" class="btn btn-primary pull-right" @click="$emit('poster-commentaire', '7')">Ajouter</a>
                     </div>
                 </div>
                 
@@ -1110,7 +1063,8 @@
     });
 
 
-  Vue.component('article8',{
+    Vue.component('article8',{
+        props : ['username'],
       template: `
         
         <div id="containerArticleEntier">
@@ -1178,12 +1132,12 @@
         </div>
 
         <main id="saisieCommentaire">
-                <div id="commentaire">
+                <div id="commentaire" v-if="username === ''">
                     <img src="images/warning.png" width="40" height="40">
-                    Pour écrire un commentaire vous devez être connecté. <a href="authentification.html">Se connecter</a>
+                    Pour écrire un commentaire vous devez être connecté. <a @click="$emit('change-page', 'connexion')">Se connecter</a>
                 </div>
     
-                <div>
+                <div v-if="username !== ''">
                     <div id="listeCommentaire"></div>
     
                     <br />
@@ -1191,7 +1145,7 @@
                         <label id="labelCommentaire" for="labelCommentaire">Commentaire : </label>
                         <textarea class="form-control rounded-0" id="commentaireUserText" rows="10"></textarea>
                         <br />
-                        <button type="submit" id="submit" name="submit" class="btn btn-primary pull-right">Ajouter</button>
+                        <a role="button" class="btn btn-primary pull-right" @click="$emit('poster-commentaire', '8')">Ajouter</a>
                     </div>
                 </div>
                 
@@ -1201,7 +1155,8 @@
     });
 
 
-  Vue.component('article9',{
+    Vue.component('article9',{
+        props : ['username'],
       template: `
         
          <div id="containerArticleEntier">
@@ -1276,12 +1231,12 @@
         </div>
 
         <main id="saisieCommentaire">
-                <div id="commentaire" v-if="statut === 'invite'">
+                <div id="commentaire" v-if="username === ''">
                     <img src="images/warning.png" width="40" height="40">
-                    Pour écrire un commentaire vous devez être connecté. <a href="authentification.html">Se connecter</a>
+                    Pour écrire un commentaire vous devez être connecté. <a @click="$emit('change-page', 'connexion')">Se connecter</a>
                 </div>
     
-                <div v-else-if="statut === 'user'">
+                <div v-if="username !== ''">
                     <div id="listeCommentaire"></div>
     
                     <br />
@@ -1289,7 +1244,7 @@
                         <label id="labelCommentaire" for="labelCommentaire">Commentaire : </label>
                         <textarea class="form-control rounded-0" id="commentaireUserText" rows="10"></textarea>
                         <br />
-                        <button type="submit" id="submit" name="submit" class="btn btn-primary pull-right">Ajouter</button>
+                        <a role="button" class="btn btn-primary pull-right" @click="$emit('poster-commentaire', '9')">Ajouter</a>
                     </div>
                 </div>
                 
@@ -1298,7 +1253,8 @@
 
       `
     });
-  Vue.component('article10',{
+    Vue.component('article10',{
+        props : ['username'],
       template: `
         
         <div id="containerArticleEntier">
@@ -1375,12 +1331,12 @@
         </div>
 
         <main id="saisieCommentaire">
-                <div id="commentaire">
+                <div id="commentaire" v-if="username === ''">
                     <img src="images/warning.png" width="40" height="40">
-                    Pour écrire un commentaire vous devez être connecté. <a href="authentification.html">Se connecter</a>
+                    Pour écrire un commentaire vous devez être connecté. <a @click="$emit('change-page', 'connexion')">Se connecter</a>
                 </div>
     
-                <div>
+                <div v-if="username !== ''">
                     <div id="listeCommentaire"></div>
     
                     <br />
@@ -1388,7 +1344,7 @@
                         <label id="labelCommentaire" for="labelCommentaire">Commentaire : </label>
                         <textarea class="form-control rounded-0" id="commentaireUserText" rows="10"></textarea>
                         <br />
-                        <button type="submit" id="submit" name="submit" class="btn btn-primary pull-right">Ajouter</button>
+                        <a role="button" class="btn btn-primary pull-right" @click="$emit('poster-commentaire', '10')">Ajouter</a>
                     </div>
                 </div>
                 
@@ -1396,7 +1352,8 @@
     </div>
       `
     });
-  Vue.component('article15',{
+    Vue.component('article15',{
+        props : ['username'],
       template: `
         
         <div id="containerArticleEntier">
@@ -1450,12 +1407,12 @@
         </div>
 
         <main id="saisieCommentaire">
-                <div id="commentaire">
+                <div id="commentaire" v-if="username === ''">
                     <img src="images/warning.png" width="40" height="40">
-                    Pour écrire un commentaire vous devez être connecté. <a href="authentification.html">Se connecter</a>
+                    Pour écrire un commentaire vous devez être connecté. <a @click="$emit('change-page', 'connexion')">Se connecter</a>
                 </div>
     
-                <div>
+                <div v-if="username !== ''">
                     <div id="listeCommentaire"></div>
     
                     <br />
@@ -1463,7 +1420,7 @@
                         <label id="labelCommentaire" for="labelCommentaire">Commentaire : </label>
                         <textarea class="form-control rounded-0" id="commentaireUserText" rows="10"></textarea>
                         <br />
-                        <button type="submit" id="submit" name="submit" class="btn btn-primary pull-right">Ajouter</button>
+                        <a role="button" class="btn btn-primary pull-right" @click="$emit('poster-commentaire', '15')">Ajouter</a>
                     </div>
                 </div>
                 
@@ -1471,7 +1428,8 @@
     </div>
       `
     });
-  Vue.component('article16',{
+    Vue.component('article16',{
+        props : ['username'],
       template: `
         
         <div id="containerArticleEntier">
@@ -1555,12 +1513,12 @@
         </div>
 
         <main id="saisieCommentaire">
-                <div id="commentaire">
+                <div id="commentaire" v-if="username === ''">
                     <img src="images/warning.png" width="40" height="40">
-                    Pour écrire un commentaire vous devez être connecté. <a href="authentification.html">Se connecter</a>
+                    Pour écrire un commentaire vous devez être connecté. <a @click="$emit('change-page', 'connexion')">Se connecter</a>
                 </div>
     
-                <div>
+                <div v-if="username !== ''">
                     <div id="listeCommentaire"></div>
     
                     <br />
@@ -1568,7 +1526,7 @@
                         <label id="labelCommentaire" for="labelCommentaire">Commentaire : </label>
                         <textarea class="form-control rounded-0" id="commentaireUserText" rows="10"></textarea>
                         <br />
-                        <button type="submit" id="submit" name="submit" class="btn btn-primary pull-right">Ajouter</button>
+                        <a role="button" class="btn btn-primary pull-right" @click="$emit('poster-commentaire', '16')">Ajouter</a>
                     </div>
                 </div>
                 

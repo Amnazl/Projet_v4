@@ -9,9 +9,13 @@
   "author": "ilyess marouf",
   "license": "ISC",
   "dependencies": {
+    "@progress/kendo-grid-vue-wrapper": "^2018.3.1025",
+    "@progress/kendo-theme-default": "^2.60.0",
+    "@progress/kendo-ui": "^2018.3.1114",
     "bcryptjs": "*",
     "body-parser": "*",
     "connect-flash": "*",
+    "consolidate": "^0.15.1",
     "cookie-parser": "*",
     "cors": "^2.8.5",
     "express": "*",
@@ -21,6 +25,7 @@
     "express-validator": "*",
     "fs": "0.0.1-security",
     "jsonfile": "^5.0.0",
+    "mongoose": "^5.3.12",
     "passport": "*",
     "passport-http": "*",
     "passport-local": "*"

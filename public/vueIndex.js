@@ -1,5 +1,8 @@
+
+
 axios.defaults.withCredentials = true;
 Vue.prototype.$http = axios;
+
 
 
 const app = new Vue({
@@ -7,6 +10,7 @@ const app = new Vue({
   data: {
     currentPage: 'index',
     username : '',
+      varListOfComments : [],
 
   },
   created () {
@@ -22,6 +26,9 @@ const app = new Vue({
           })
   },
   methods: {
+
+
+
     changePage (page) {
       this.currentPage = page;
     },
@@ -78,18 +85,20 @@ const app = new Vue({
           this.$http.get('/users/'+this.username+'/comments/user').then(listOfComments => {
               //this.username = '';
               console.log(listOfComments);
-              //this.changePage('index');
+              this.varListOfComments = listOfComments;
           })
 
       },
 
 
       getCommentByArticle(idArticle){
-          this.$http.get('/users/'+idArticle+'/comments/article').then(listOfComments => {
+        //Recuperer le contenu du texte
+        alert("ARTICLE " + idArticle);
+          /*this.$http.get('/users/'+idArticle+'/comments/article').then(listOfComments => {
               //this.username = '';
               console.log(listOfComments);
               //this.changePage('index');
-          })
+          })*/
 
       }
 
