@@ -30,11 +30,15 @@ router.get('/:username/comments/user', (req, res) => {
 router.get('/:idArticle/comments/article', (req, res) => {
     var id_article = req.params.idArticle;
     console.log(id_article);
-    res.json(Comment.getCommentByArticle(id_article, function(err, data) {
-        console.log(data);
+
+    Comment.getCommentByArticle(id_article, function(err, data) {
+        //console.log(data);
         res.json(data);
         //req.send(data);
-    }));
+    });
+
+    //console.log(c);
+    //res.send("oui");
 });
 
 router.get('/register',function(req,res){
@@ -214,38 +218,27 @@ router.get('/logout', (req, res, next) => {
 });
 
 
-router.post('/',function(req,res){
 
 
-    var content_comment = req.body.comment;
+
+router.post('/:idArticle/comment/addComment',function(req,res){
+    var content_comment = req.body.content;
     var newComment = new Comment({
-        username: req.user.username,
-        id_article: 1,
+        username: req.session.user.username,
+        id_article: req.params.idArticle,
         content: content_comment,
-        date : new Date()
+        date : new Date().getTime()
     });
     Comment.addComment(newComment, function(err,comment){
         if(err){
-            req.flash('error_msg',"mauvais Comment");
+            //req.flash('error_msg',"mauvais Comment");
         }else{
             console.log(comment);
-            res.redirect('/');
         }
 
     });
-
-    res.redirect('/');
-
-
-    /*var newArticle = new Article({
-        id: 1,
-        arrayIdComment: {}
-
-    });*/
-
-    //Article.addCommentToArticle(newComment,newArticle)
+    res.send('OK');
 });
-
 
 
 module.exports = router;

@@ -3,7 +3,7 @@
     {
       "_id": "5be97a24bbadc21b18b73ad6",
       "username": "amine",
-      "id_article": 1,
+      "id_article": 2,
       "content": "Amine",
       "date": 1542027812311
     },
@@ -13,6 +13,13 @@
       "id_article": 1,
       "content": "Ilyess",
       "date": 1542030112193
+    },
+    {
+      "_id": "5bf06411a840da7f291132e1",
+      "username": "ilyess",
+      "id_article": 1,
+      "content": "Trop bien l'article",
+      "date": 1542480913723
     }
   ]
 }

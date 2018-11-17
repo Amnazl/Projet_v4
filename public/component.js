@@ -507,7 +507,8 @@
 
 
     Vue.component('article1',{
-        props : ['username'],
+
+        props : ['username','varlistofcomments'],
       template: `
         
         <div id="containerArticleEntier">
@@ -563,21 +564,39 @@
               </div>
 
               <div v-if="username !== ''">
-                  <div id="listeCommentaire"></div>
+                  <div id="listeCommentaire">
+                     <ul> <li v-for="comment in varlistofcomments" v-bind:key="comment._id">
+                            {{comment.content}}
+                      </li> </ul> 
+                  
+               
+               
+               </div>
 
                   <br />
                   <div id="commentaireUser">
                       <label id="labelCommentaire" for="labelCommentaire">Commentaire : </label>
-                      <textarea class="form-control rounded-0" id="commentaireUserText" rows="10"></textarea>
+                      <textarea class="form-control rounded-0"  name="comment" v-model="dataComment.content" id="commentaireUserText" rows="10"></textarea>
                       <br />
-                      <a role="button" class="btn btn-primary pull-right" @click="$emit('poster-commentaire', '1')">Ajouter</a>
+                      <a role="button" class="btn btn-primary pull-right" @click="$emit('poster-commentaire', dataComment)">Ajouter</a>
                   </div>
               </div>
               
           </main>
 
-      </div>
-      `
+      </div>`,
+        data: function() {
+            return {
+                dataComment : {
+                    'id_article' : 1,
+                    'content' : ''
+                }
+            }
+        },
+        mounted:function () {
+            this.$emit('lire-commentaires',1);
+            this.$forceUpdate();
+        },
     });
 
 

@@ -10,9 +10,9 @@ const app = new Vue({
   data: {
     currentPage: 'index',
     username : '',
-      varListOfComments : [],
-
+    varListOfComments :[],
   },
+
   created () {
       this.$http.get('/users/user')
           .then(user => {
@@ -92,15 +92,35 @@ const app = new Vue({
 
 
       getCommentByArticle(idArticle){
-        //Recuperer le contenu du texte
-        alert("ARTICLE " + idArticle);
-          /*this.$http.get('/users/'+idArticle+'/comments/article').then(listOfComments => {
-              //this.username = '';
-              console.log(listOfComments);
-              //this.changePage('index');
-          })*/
 
+
+          this.$http.get('/users/'+idArticle+'/comments/article').then(listOfComments => {
+              this.varListOfComments = listOfComments.data;
+
+          })
+
+      },
+
+
+      postCommentByArticle(dataComment){
+
+        if(dataComment.content === ''){
+            alert("Veuillez saisir un commentaire.");
+        }else{
+            this.$http.post('/users/'+dataComment.id_article+'/comment/addComment', dataComment,{
+                withCredentials : true,
+                method : 'POST',
+            }).then((req) => {
+                if(req.data === 'erreur'){
+                    alert("Attention, un problème est survenu, votre commentaire n'a pas été enregistré");
+                }else if (req.data === 'OK') {
+                    alert("Votre commentaire a été ajouté");
+                    this.varListOfComments.push(dataComment);
+
+
+                }
+            })
+        }
       }
-
   }
 })

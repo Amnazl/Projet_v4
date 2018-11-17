@@ -30,7 +30,7 @@ var Comment = module.exports = mongoose.model('Comment', CommentSchema);
 module.exports.addComment = function(newComment, callback){
 
 
-    fs.readFile('commentaires.json', 'utf-8', function(err, data) {
+    fs.readFile('comments.json', 'utf-8', function(err, data) {
         try {
             data = JSON.parse(data);
         } catch (err) {
@@ -40,7 +40,7 @@ module.exports.addComment = function(newComment, callback){
             data.comments = []
         }
         data.comments.push(newComment);
-        fs.writeFile('commentaires.json', JSON.stringify(data,null,2), 'utf-8', function(err) {
+        fs.writeFile('comments.json', JSON.stringify(data,null,2), 'utf-8', function(err) {
             console.log(newComment);
         })
     });
@@ -112,12 +112,13 @@ async function getrhjeghjrehgkre (req, res) {
 module.exports.getCommentByArticle = function(id_article, callback){
     fs.readFile('comments.json', 'utf-8', function(err, data) {
         data = JSON.parse(data);
-        for(i = 0; i < data.comments.lenght; i++){
-            if(!(data.comments[i].id_article === id_article)){
+        for(i = 0; i < data.comments.length; i++){
+            if(data.comments[i].id_article != id_article){
                 data.comments.splice(i,1);
                 i--;
             }
         }
+
         callback(null,data.comments);
 
     });
