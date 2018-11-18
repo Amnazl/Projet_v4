@@ -483,7 +483,7 @@
               <tbody>
                 <tr v-for="commentbyusername in varlistofcommentsbyusername" v-bind:key="commentbyusername._id">
                   <td>{{commentbyusername.id_article}}</td>
-                  <td>{{commentbyusername.content}}</td>
+                  <td><input :value="commentbyusername.content"></td>
                   <td>{{commentbyusername.date}}</td>
                   <td><input type="button" value="Modifier"></td>
                   <td><input type="button" @click="$emit('supprimer-commentaires-by-id', commentbyusername._id)" value="Suppression"></td>

@@ -15,13 +15,6 @@
       "date": 1542030112193
     },
     {
-      "_id": "5bf06b0618830367cb07ce57",
-      "username": "administrateur",
-      "id_article": 1,
-      "content": "SUper voici un article mangifique bonne lecture ç vous . Votre admin pref",
-      "date": 1542482694391
-    },
-    {
       "_id": "5bf16922ac76c36848071ab0",
       "username": "administrateur",
       "id_article": 1,
@@ -48,6 +41,13 @@
       "id_article": 1,
       "content": "ffffdfffffff",
       "date": "18/11/2018 à 15:16:43"
+    },
+    {
+      "_id": "5bf185291056e869b0934703",
+      "username": "administrateur",
+      "id_article": 1,
+      "content": "skubidoupapa",
+      "date": "18/11/2018 à 15:28:41"
     }
   ]
 }
