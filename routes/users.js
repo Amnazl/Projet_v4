@@ -193,7 +193,10 @@ router.get('/error',function (req, res) {
 });
 
 
-router.post('')
+router.post('/:idComment/comment/deleteComment',function(req,res) {
+    Comment.deleteComment(req.params.idComment);
+    res.send('OK');
+});
 
 
 

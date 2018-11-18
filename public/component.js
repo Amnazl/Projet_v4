@@ -486,7 +486,7 @@
                   <td>{{commentbyusername.content}}</td>
                   <td>{{commentbyusername.date}}</td>
                   <td><input type="button" value="Modifier"></td>
-                  <td><input type="button" value="Suppression"></td>
+                  <td><input type="button" @click="$emit('supprimer-commentaires-by-id', commentbyusername._id)" value="Suppression"></td>
                 </tr>
               </tbody>
             </table>

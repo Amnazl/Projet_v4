@@ -65,7 +65,7 @@ module.exports.deleteComment = function(id_comment){
     fs.readFile('comments.json', 'utf-8', function(err, data) {
         data = JSON.parse(data);
         for(i = 0; i < data.comments.length; i++){
-            if(data.comments[i]._id != id_comment){
+            if(data.comments[i]._id === id_comment){
                 data.comments.splice(i,1);
                 i--;
             }

@@ -122,6 +122,24 @@ const app = new Vue({
                 }
             })
         }
+      },
+
+      deleteCommentById(id_comment){
+          this.$http.post('/users/'+id_comment+'/comment/deleteComment', id_comment,{
+              withCredentials : true,
+              method : 'POST',
+          }).then((req) => {
+              for(i = 0; i < this.varListOfCommentsByUsername.length; i++){
+                  if(this.varListOfCommentsByUsername[i]._id === id_comment){
+                      this.varListOfCommentsByUsername.splice(i,1);
+                      i--;
+                  }
+              }
+              alert("Votre commentaire a été supprimé");
+          })
       }
-  }
+  },
+
+
+
 })
