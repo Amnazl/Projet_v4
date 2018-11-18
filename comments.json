@@ -20,6 +20,54 @@
       "id_article": 1,
       "content": "Trop bien l'article",
       "date": 1542480913723
+    },
+    {
+      "_id": "5bf06b0618830367cb07ce57",
+      "username": "administrateur",
+      "id_article": 1,
+      "content": "SUper voici un article mangifique bonne lecture ç vous . Votre admin pref",
+      "date": 1542482694391
+    },
+    {
+      "_id": "5bf16922ac76c36848071ab0",
+      "username": "administrateur",
+      "id_article": 1,
+      "content": "test",
+      "date": 1542547746434
+    },
+    {
+      "_id": "5bf16fd2a4de3068a175b471",
+      "username": "amine",
+      "id_article": 1,
+      "content": "SUper voici un article mangifique bonne lecture ç vous . Votre admin pref\nSUper voici un article mangifique bonne lecture ç vous . Votre admin pref\nSUper voici un article mangifique bonne lecture ç vous . Votre admin pref\nSUper voici un article mangifique bonne lecture ç vous . Votre admin pref\nSUper voici un article mangifique bonne lecture ç vous . Votre admin pref\nSUper voici un article mangifique bonne lecture ç vous . Votre admin pref\nSUper voici un article mangifique bonne lecture ç vous . Votre admin pref\n",
+      "date": 1542549458497
+    },
+    {
+      "_id": "5bf16feda4de3068a175b472",
+      "username": "ilyess",
+      "id_article": 3,
+      "content": "SUper voici un article mangifique bonne lecture ç vous . Votre admin prefSUper voici un article mangifique bonne lecture ç vous . Votre admin prefSUper voici un article mangifique bonne lecture ç vous . Votre admin prefSUper voici un article mangifique bonne lecture ç vous . Votre admin prefSUper voici un article mangifique bonne lecture ç vous . Votre admin pref\n",
+      "date": 1542549485496
+    },
+    {
+      "_id": "5bf1734ed2c12468d44553da",
+      "username": "ilyess",
+      "id_article": 1,
+      "content": "jofjeifofejoefoz"
+    },
+    {
+      "_id": "5bf17380f0c41a68de78227a",
+      "username": "ilyess",
+      "id_article": 1,
+      "content": "aaa",
+      "date": "Sun, 18 Nov 2018 14:13:20 GMT"
+    },
+    {
+      "_id": "5bf17462ec19d068ea98cda0",
+      "username": "ilyess",
+      "id_article": 1,
+      "content": "dojdzadozia",
+      "date": "18/11/2018 à 14:17:06"
     }
   ]
 }

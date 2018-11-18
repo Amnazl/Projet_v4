@@ -19,7 +19,7 @@ var CommentSchema = mongoose.Schema({
     },
 
     date : {
-        type : Number
+        type : String
     }
 });
 
@@ -62,15 +62,15 @@ module.exports.addComment = function(newComment, callback){
 
 
 module.exports.deleteComment = function(id_comment){
-    fs.readFile('commentaires.json', 'utf-8', function(err, data) {
+    fs.readFile('comments.json', 'utf-8', function(err, data) {
         data = JSON.parse(data);
-        for(i = 0; i < data.comments.lenght; i++){
-            if(!(data.comments[i]._id === id_comment)){
+        for(i = 0; i < data.comments.length; i++){
+            if(data.comments[i]._id != id_comment){
                 data.comments.splice(i,1);
                 i--;
             }
         }
-        fs.writeFile('commentaires.json', JSON.stringify(data,null,2), 'utf-8', function(err) {
+        fs.writeFile('comments.json', JSON.stringify(data,null,2), 'utf-8', function(err) {
             //console.log(data);
         })
     });
@@ -94,20 +94,6 @@ module.exports.getCommentByUsername = function(username, callback){
 
 
 }
-/*
-module.exports.getCommentByUsername = function (username, callback) {
-	fs.readFile('commentaires.json', 'utf-8', (err, data) => {
-		if (err) return callback(err)
-		data = JSON.parse(data)
-		callback(null, data.filter(c => c.username === username))
-	})
-}
-
-async function getrhjeghjrehgkre (req, res) {
-	const result = await getCommentByUsername(username)
-
-}*/
-
 
 module.exports.getCommentByArticle = function(id_article, callback){
     fs.readFile('comments.json', 'utf-8', function(err, data) {

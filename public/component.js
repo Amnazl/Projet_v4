@@ -456,6 +456,7 @@
 
 
     Vue.component('mon-compte', {
+        props : ['username','varlistofcommentsbyusername'],
         template: `
       
  
@@ -472,7 +473,7 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col">Id Article</th>
+                  <th scope="col">N° de l'article</th>
                   <th scope="col">Commentaire</th>
                   <th scope="col">Date de dernière modification</th>
                   <th scope="col">Modification</th>
@@ -480,28 +481,22 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
+                <tr v-for="commentbyusername in varlistofcommentsbyusername" v-bind:key="commentbyusername._id">
+                  <td>{{commentbyusername.id_article}}</td>
+                  <td>{{commentbyusername.content}}</td>
+                  <td>{{commentbyusername.date}}</td>
+                  <td><input type="button" value="Modifier"></td>
+                  <td><input type="button" value="Suppression"></td>
                 </tr>
               </tbody>
             </table>
         </div>
-      `
+      `,
+
+        mounted: function () {
+            this.$emit('lire-commentaires-by-username');
+            this.$forceUpdate();
+        }
     });
 
 

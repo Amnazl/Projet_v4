@@ -45,7 +45,12 @@
     </section>
 
     <section v-if="currentPage === 'mon-compte'">
-        <mon-compte v-on:change-page="changePage($event)"></mon-compte>
+        <mon-compte
+                v-bind:username="username"
+                v-bind:varlistofcommentsbyusername="varListOfCommentsByUsername"
+                v-on:change-page="changePage($event)"
+                v-on:connexion-user="connexionUser($event)"
+                v-on:lire-commentaires-by-username="getCommentByUsername($event)"></mon-compte>
     </section>
 
 

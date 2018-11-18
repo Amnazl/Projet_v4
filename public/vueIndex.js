@@ -11,6 +11,7 @@ const app = new Vue({
     currentPage: 'index',
     username : '',
     varListOfComments :[],
+      varListOfCommentsByUsername: [],
   },
 
   created () {
@@ -82,10 +83,10 @@ const app = new Vue({
 
 
       getCommentByUsername(){
-          this.$http.get('/users/'+this.username+'/comments/user').then(listOfComments => {
-              //this.username = '';
-              console.log(listOfComments);
-              this.varListOfComments = listOfComments;
+          this.$http.get('/users/'+this.username+'/comments/user').then(listOfCommentsByUsername => {
+              console.log("1" + listOfCommentsByUsername.data[0].content);
+              this.varListOfCommentsByUsername = listOfCommentsByUsername.data;
+              console.log("2" + this.varListOfCommentsByUsername[0].content);
           })
 
       },

@@ -16,17 +16,19 @@ var username_global;
 	return []
 }*/
 
+//Recupérer les commentaires d'un utilisateur
 router.get('/:username/comments/user', (req, res) => {
     var username = req.params.username;
     console.log(username);
-    res.json(Comment.getCommentByUsername(username, function(err, data) {
+    Comment.getCommentByUsername(username, function(err, data) {
         console.log(data);
-        req.json(data);
+        res.json(data);
         //req.send(data);
-    }));
+    });
 });
 
 
+//Récupérer les commentaires par article
 router.get('/:idArticle/comments/article', (req, res) => {
     var id_article = req.params.idArticle;
     console.log(id_article);
@@ -152,25 +154,6 @@ passport.deserializeUser(function (id, done) {
 });
 
 
-/*router.post('/login',
-    passport.authenticate('local', { failureRedirect: '/users/error'}),
-    function(req, res){
-
-
-        if(req.user !== 'undefined'){
-
-            var user = req.user;
-            console.log(user.username);
-            req.session.user =user;
-            res.json({id: user._id, username: user.username})
-        }else{
-            console.log("pas user");
-            res.status(200).send();
-        }
-
-    });
-*/
-
 router.post('/login', (req, res, next) => {
     var username = req.body.username;
     var password = req.body.password;
@@ -210,6 +193,9 @@ router.get('/error',function (req, res) {
 });
 
 
+router.post('')
+
+
 
 router.get('/logout', (req, res, next) => {
     req.session.destroy(function (err){
@@ -220,14 +206,14 @@ router.get('/logout', (req, res, next) => {
 
 
 
-
+//Ajout un commentaire dans un article
 router.post('/:idArticle/comment/addComment',function(req,res){
     var content_comment = req.body.content;
     var newComment = new Comment({
         username: req.session.user.username,
         id_article: req.params.idArticle,
         content: content_comment,
-        date : new Date().getTime()
+        date : new Date().toLocaleString('fr-FR', { timeZone: 'UTC' }),
     });
     Comment.addComment(newComment, function(err,comment){
         if(err){
