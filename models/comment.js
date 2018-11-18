@@ -68,7 +68,11 @@ module.exports.editComment = function(dataComment){
         for(i = 0; i < data.comments.length; i++){
             if(data.comments[i]._id === dataComment[0]){
                 console.log("ca passe");
-                data.comments[i].content;
+                console.log("avant modif : " + data.comments[i].content);
+
+                data.comments[i].content = dataComment[1];
+                console.log("TETE" + dataComment[1]);
+                console.log("après modif : " + data.comments[i].content);
                 data.comments[i].date = new Date().toLocaleString('fr-FR', { timeZone: 'UTC' });
             }
         }

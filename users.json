@@ -35,6 +35,24 @@
       "name": "aminetest",
       "username": "aminetest",
       "password": "$2a$10$auU86.1AeYCnWqTsXQLI2OVhPzx8QKWm8q6li0.ojEzT2QA7h9VQC"
+    },
+    {
+      "_id": "5bf1a8ae2ba9d16a68443f89",
+      "name": "Amine",
+      "username": "administrateur2",
+      "password": "$2a$10$hMhQRamKyOjA03HtlwvAVO46mYDwmT2TBm2j.oM4piRO5LA97GiuG"
+    },
+    {
+      "_id": "5bf1bc2fcdb13a6c04400fc9",
+      "name": "aaa",
+      "username": "test",
+      "password": "$2a$10$KC3ovhfww.Xb8FgxzFrhcuvMsCMYDYk91yH9opAjxBBKa0ngBlJ2C"
+    },
+    {
+      "_id": "5bf1bc807d45716c0b6ee2d6",
+      "name": "aa",
+      "username": "aaaaaaaa",
+      "password": "$2a$10$y/aPfWj8MnZkutssS2K17eYnHIENX7lvQyO2e.Uk.lhS.CcubOhyK"
     }
   ]
 }

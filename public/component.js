@@ -59,7 +59,7 @@
           <input id="motDePasse" type="password" v-model="identifiantsUser.password" name="password" placeholder="Mot de passe">
         </div>
         <div class="composantsConnexion">
-          <a class="btn btn-primary" @click="$emit('connexion-user', identifiantsUser)">Connexion</a>
+          <a class="btn btn-primary pull-right" @click="$emit('connexion-user', identifiantsUser)">Connexion</a>
         </div>
         <div class="composantsConnexion" id="nonInscrit_connexion">
           <b>Pas encore inscrit ? </b> <u><a@click="$emit('change-page', 'inscription')">Inscription</a></u>
@@ -110,7 +110,7 @@
                 <label for="Password2">Mot de passe (vérification) :</label>
                 <input type="password" class="form-control" id="Password2" name="password2" v-model="dataInscriptionUser.password2" placeholder="Veuillez ressaisir votre mot de passe" required="required">
             </div>
-            <a class="btn btn-primary" @click="$emit('inscription', dataInscriptionUser)">S'inscrire</a>
+            <a class="btn btn-primary pull-right" @click="$emit('inscription', dataInscriptionUser)">S'inscrire</a>
         </div>`,
 
           data: function() {
@@ -281,6 +281,7 @@
                         réseaux promet
                         une connexion beaucoup plus rapide, elle permettra également de nouveaux usages qui pourraient
                         bientôt changer nos vies...</b>
+                     <br />
                     <a @click="$emit('change-page', 'article1')" class="lienLireSuite" >Lire la suite...</a>
                 </label>
 
@@ -296,6 +297,7 @@
                         autonome électrique : le Vera. Non seulement le véhicule ne comporte pas de volant, mais surtout,
                         celui-ci n’a pas non plus de cabine ! En revanche, ce nouveau véhicule ne devrait pas fréquenter
                         nos routes... </b>
+                    <br />
                     <a class="lienLireSuite" @click="$emit('change-page', 'article6')">Lire la suite</a>
                 </label>
 
@@ -311,6 +313,7 @@
                         de maison de retraite et autres étudiants de prendre conscience des difficultés quotidiennes
                         rencontrées
                         par les personnes âgées...</b>
+                    <br />
                     <a class="lienLireSuite" @click="$emit('change-page', 'article2')">Lire la suite</a>
                 </label>
 
@@ -325,6 +328,7 @@
                         artificielle.
                         En effet, ces derniers ont mis au point un robot ayant la capacité d’identifier des objets que l’IA
                         n’avait jamais vus par le passé...</b>
+                    <br />
                     <a class="lienLireSuite" @click="$emit('change-page', 'article4')">Lire la suite</a>
                 </label>
 
@@ -339,6 +343,7 @@
                       des chantiers importants ? Fabriqué au Japon, un nouveau robot pourrait
                       effectivement devenir un jour une véritable star sur des chantiers de
                       tous horizons...</b>
+                   <br />
                   <a class="lienLireSuite" @click="$emit('change-page', 'article7')">Lire la suite</a>
               </label>
 
@@ -354,6 +359,7 @@
                         sensation de nausée. Une start-up américaine a conçu un prototype de
                         chaise VR, dans laquelle l’utilisateur ne ressent pas cette désagréable
                         sensation...</b>
+                    <br />
                     <a class="lienLireSuite" @click="$emit('change-page', 'article8')">Lire la suite</a>
                 </label>
 
@@ -368,6 +374,7 @@
                         environ 5000 visages en moyenne. Certaines personnes peuvent même aller
                         jusqu’à 10 000. Une capacité de reconnaissance faciale que nous devons
                         en grande partie à notre histoire...</b>
+                    <br />
                     <a class="lienLireSuite" @click="$emit('change-page', 'article9')"">Lire la suite</a>
                 </label>
 
@@ -384,6 +391,7 @@
                         les tissus gastro-intestinaux des astronautes.
                         Une problématique de plus pour les prochains vols
                         à destination de Mars...</b>
+                     <br />
                     <a class="lienLireSuite" @click="$emit('change-page', 'article10')">Lire la suite</a>
                 </label>
 
@@ -398,6 +406,7 @@
                     Sonitus Technologies pour la création d’un dispositif
                     appelé “Molar Mic”, une sorte de talkie-walkie pouvant
                     être placé sur les dents des soldats...</b>
+                <br />
                 <a class="lienLireSuite" @click="$emit('change-page', 'article15')">Lire la suite</a>
             </label>
 
@@ -415,6 +424,8 @@
                         une descente chez lui pour saisir son matériel et l’inculper.
                         L’affaire va se résoudre le mois prochain devant
                         le tribunal fédéral...</b>
+                        
+                     <br />
                     <a class="lienLireSuite" @click="$emit('change-page', 'article16')">Lire la suite</a>
                 </label>
 
@@ -432,6 +443,7 @@
                         une descente chez lui pour saisir son matériel et l’inculper.
                         L’affaire va se résoudre le mois prochain devant
                         le tribunal fédéral...</b>
+                    <br />
                     <a class="lienLireSuite" @click="$emit('change-page', 'article3')">Lire la suite</a>
                 </label>
 
@@ -446,6 +458,7 @@
                         la Sécurité sociale aurait lancé en France un vaste plan
                         d’implantation de puces RFID sous la peau, afin de remplacer
                         la célèbre carte Vitale...</b>
+                    <br />
                     <a class="lienLireSuite" @click="$emit('change-page', 'article5')">Lire la suite</a>
                 </label>
 
@@ -483,15 +496,17 @@
               <tbody>
                 <tr v-for="commentbyusername in varlistofcommentsbyusername" v-bind:key="commentbyusername._id">
                   <td>{{commentbyusername.id_article}}</td>
-                  <td><input :value="commentbyusername.content"></td>
+                  <td> <input :value="commentbyusername.content"></td>
                   <td>{{commentbyusername.date}}</td>
-                  <td><input type="button" @click="$emit('editer-commentaire', {'id':commentbyusername._id,'content':commentbyusername.content})" value="Modifier"></td>
-                  <td><input type="button" @click="$emit('supprimer-commentaires-by-id', commentbyusername._id)" value="Suppression"></td>
+                  <td><input type="button" class="btn btn-primary" @click="$emit('editer-commentaire', {'id':commentbyusername._id,'content': commentbyusername.content})" value="Modifier"></td>
+                  <td><input type="button" class="btn btn-primary" @click="$emit('supprimer-commentaires-by-id', commentbyusername._id)" value="Supprimer"></td>
                 </tr>
               </tbody>
             </table>
         </div>
       `,
+
+
         mounted: function () {
             this.$emit('lire-commentaires-by-username');
             this.$forceUpdate();
@@ -554,22 +569,24 @@
           <main id="saisieCommentaire">
               <div id="commentaire" v-if="username === ''">
                   <img src="images/warning.png" width="40" height="40">
-                  Pour écrire un commentaire vous devez être connecté. <a @click="$emit('change-page', 'connexion')">Se connecter</a>
+                  Pour lire et/ou écrire un commentaire vous devez être connecté. <u><a @click="$emit('change-page', 'connexion')">Se connecter</a></u>
               </div>
 
               <div v-if="username !== ''">
+                  <hr class="style2" />
                   <div id="listeCommentaire">
-                     <ul> <li v-for="comment in varlistofcomments" v-bind:key="comment._id">
-                            {{comment.content}}
-                      </li> </ul> 
-                  
-               
-               
-               </div>
+                    <label id="labelCommentaire" for="labelCommentaire" style="border-bottom: 2px solid black;">Commentaires : </label>
+                    <br /><br />
+                    <div id="cssCommentaires" class="commentaireArticle" v-for="comment in varlistofcomments" v-bind:key="comment._id">
+                           {{comment.username}} a écrit le {{comment.date}}, le commentaire suivant : <br/><br/>  {{comment.content}}
+                           <br />
+                           <hr class="style2" />
+                    </div>
+                  </div>
 
                   <br />
                   <div id="commentaireUser">
-                      <label id="labelCommentaire" for="labelCommentaire">Commentaire : </label>
+                      <label id="labelCommentaire" for="labelCommentaire">Ajouter un commentaire : </label>
                       <textarea class="form-control rounded-0"  name="comment" v-model="dataComment.content" id="commentaireUserText" rows="10"></textarea>
                       <br />
                       <a role="button" class="btn btn-primary pull-right" @click="$emit('poster-commentaire', dataComment)">Ajouter</a>
@@ -595,7 +612,7 @@
 
 
     Vue.component('article2',{
-        props : ['username'],
+        props : ['username','varlistofcomments'],
 
       template: `
         
@@ -659,30 +676,50 @@
         </div>
 
         <main id="saisieCommentaire">
-                <div id="commentaire" v-if="username === ''">
-                    <img src="images/warning.png" width="40" height="40">
-                    Pour écrire un commentaire vous devez être connecté. <a @click="$emit('change-page', 'connexion')">Se connecter</a>
-                </div>
-    
-                <div v-if="username !== ''">
-                    <div id="listeCommentaire"></div>
-    
-                    <br />
-                    <div id="commentaireUser">
-                        <label id="labelCommentaire" for="labelCommentaire">Commentaire : </label>
-                        <textarea class="form-control rounded-0" id="commentaireUserText" rows="10"></textarea>
-                        <br />
-                        <a role="button" class="btn btn-primary pull-right" @click="$emit('poster-commentaire', '2')">Ajouter</a>
+              <div id="commentaire" v-if="username === ''">
+                  <img src="images/warning.png" width="40" height="40">
+                  Pour lire et/ou écrire un commentaire vous devez être connecté. <u><a @click="$emit('change-page', 'connexion')">Se connecter</a></u>
+              </div>
+
+              <div v-if="username !== ''">
+                  <hr class="style2" />
+                  <div id="listeCommentaire">
+                    <label id="labelCommentaire" for="labelCommentaire" style="border-bottom: 2px solid black;">Commentaires : </label>
+                    <br /><br />
+                    <div id="cssCommentaires" class="commentaireArticle" v-for="comment in varlistofcomments" v-bind:key="comment._id">
+                           {{comment.username}} a écrit le {{comment.date}}, le commentaire suivant : <br/><br/>  {{comment.content}}
+                           <br />
+                           <hr class="style2" />
                     </div>
-                </div>
-                
-        </main>
-      </div>
-      `
+                  </div>
+
+                  <br />
+                  <div id="commentaireUser">
+                      <label id="labelCommentaire" for="labelCommentaire">Ajouter un commentaire : </label>
+                      <textarea class="form-control rounded-0"  name="comment" v-model="dataComment.content" id="commentaireUserText" rows="10"></textarea>
+                      <br />
+                      <a role="button" class="btn btn-primary pull-right" @click="$emit('poster-commentaire', dataComment)">Ajouter</a>
+                  </div>
+              </div>
+              
+          </main>
+      </div>`,
+        data: function() {
+            return {
+                dataComment : {
+                    'id_article' : 2,
+                    'content' : ''
+                }
+            }
+        },
+        mounted:function () {
+            this.$emit('lire-commentaires',2);
+            this.$forceUpdate();
+        },
     });
 
     Vue.component('article3',{
-        props : ['username'],
+        props : ['username','varlistofcomments'],
       template: `
         <div id="containerArticleEntier">
         <label id="titreArticleEntier">
@@ -718,32 +755,52 @@
         </div>
 
         <main id="saisieCommentaire">
-                <div id="commentaire" v-if="username === ''">
-                    <img src="images/warning.png" width="40" height="40">
-                    Pour écrire un commentaire vous devez être connecté. <a @click="$emit('change-page', 'connexion')">Se connecter</a>
-                </div>
-    
-                <div v-if="username !== ''">
-                    <div id="listeCommentaire"></div>
-    
-                    <br />
-                    <div id="commentaireUser">
-                        <label id="labelCommentaire" for="labelCommentaire">Commentaire : </label>
-                        <textarea class="form-control rounded-0" id="commentaireUserText" rows="10"></textarea>
-                        <br />
-                        <a role="button" class="btn btn-primary pull-right" @click="$emit('poster-commentaire', '3')">Ajouter</a>
+              <div id="commentaire" v-if="username === ''">
+                  <img src="images/warning.png" width="40" height="40">
+                  Pour lire et/ou écrire un commentaire vous devez être connecté. <u><a @click="$emit('change-page', 'connexion')">Se connecter</a></u>
+              </div>
+
+              <div v-if="username !== ''">
+                  <hr class="style2" />
+                  <div id="listeCommentaire">
+                    <label id="labelCommentaire" for="labelCommentaire" style="border-bottom: 2px solid black;">Commentaires : </label>
+                    <br /><br />
+                    <div id="cssCommentaires" class="commentaireArticle" v-for="comment in varlistofcomments" v-bind:key="comment._id">
+                           {{comment.username}} a écrit le {{comment.date}}, le commentaire suivant : <br/><br/>  {{comment.content}}
+                           <br />
+                           <hr class="style2" />
                     </div>
-                </div>
-                
-        </main>
-    </div>
-      `
+                  </div>
+
+                  <br />
+                  <div id="commentaireUser">
+                      <label id="labelCommentaire" for="labelCommentaire">Ajouter un commentaire : </label>
+                      <textarea class="form-control rounded-0"  name="comment" v-model="dataComment.content" id="commentaireUserText" rows="10"></textarea>
+                      <br />
+                      <a role="button" class="btn btn-primary pull-right" @click="$emit('poster-commentaire', dataComment)">Ajouter</a>
+                  </div>
+              </div>
+              
+          </main>
+    </div>`,
+        data: function() {
+        return {
+            dataComment : {
+                'id_article' : 3,
+                'content' : ''
+            }
+        }
+    },
+    mounted:function () {
+        this.$emit('lire-commentaires',3);
+        this.$forceUpdate();
+    },
     });
 
 
 
     Vue.component('article4',{
-        props : ['username'],
+        props : ['username','varlistofcomments'],
       template: `
         
         <div id="containerArticleEntier">
@@ -801,32 +858,52 @@
         </div>
 
         <main id="saisieCommentaire">
-                <div id="commentaire" v-if="username === ''">
-                    <img src="images/warning.png" width="40" height="40">
-                    Pour écrire un commentaire vous devez être connecté. <a @click="$emit('change-page', 'connexion')">Se connecter</a>
-                </div>
-    
-                <div v-if="username !== ''">
-                    <div id="listeCommentaire"></div>
-    
-                    <br />
-                    <div id="commentaireUser">
-                        <label id="labelCommentaire" for="labelCommentaire">Commentaire : </label>
-                        <textarea class="form-control rounded-0" id="commentaireUserText" rows="10"></textarea>
-                        <br />
-                        <a role="button" class="btn btn-primary pull-right" @click="$emit('poster-commentaire', '4')">Ajouter</a>
+              <div id="commentaire" v-if="username === ''">
+                  <img src="images/warning.png" width="40" height="40">
+                  Pour lire et/ou écrire un commentaire vous devez être connecté. <u><a @click="$emit('change-page', 'connexion')">Se connecter</a></u>
+              </div>
+
+              <div v-if="username !== ''">
+                  <hr class="style2" />
+                  <div id="listeCommentaire">
+                    <label id="labelCommentaire" for="labelCommentaire" style="border-bottom: 2px solid black;">Commentaires : </label>
+                    <br /><br />
+                    <div id="cssCommentaires" class="commentaireArticle" v-for="comment in varlistofcomments" v-bind:key="comment._id">
+                           {{comment.username}} a écrit le {{comment.date}}, le commentaire suivant : <br/><br/>  {{comment.content}}
+                           <br />
+                           <hr class="style2" />
                     </div>
-                </div>
-                
-            </main>
-    </div>
-      `
+                  </div>
+
+                  <br />
+                  <div id="commentaireUser">
+                      <label id="labelCommentaire" for="labelCommentaire">Ajouter un commentaire : </label>
+                      <textarea class="form-control rounded-0"  name="comment" v-model="dataComment.content" id="commentaireUserText" rows="10"></textarea>
+                      <br />
+                      <a role="button" class="btn btn-primary pull-right" @click="$emit('poster-commentaire', dataComment)">Ajouter</a>
+                  </div>
+              </div>
+              
+          </main>
+    </div>`,
+        data: function() {
+            return {
+                dataComment : {
+                    'id_article' : 4,
+                    'content' : ''
+                }
+            }
+        },
+        mounted:function () {
+            this.$emit('lire-commentaires',4);
+            this.$forceUpdate();
+        },
     });
 
 
 
     Vue.component('article5',{
-        props : ['username'],
+        props : ['username','varlistofcomments'],
       template: `
         
         <div id="containerArticleEntier">
@@ -884,31 +961,52 @@
         </div>
 
         <main id="saisieCommentaire">
-                <div id="commentaire" v-if="username === ''">
-                    <img src="images/warning.png" width="40" height="40">
-                    Pour écrire un commentaire vous devez être connecté. <a @click="$emit('change-page', 'connexion')">Se connecter</a>
-                </div>
-    
-                <div v-if="username !== ''">
-                    <div id="listeCommentaire"></div>
-    
-                    <br />
-                    <div id="commentaireUser">
-                        <label id="labelCommentaire" for="labelCommentaire">Commentaire : </label>
-                        <textarea class="form-control rounded-0" id="commentaireUserText" rows="10"></textarea>
-                        <br />
-                        <a role="button" class="btn btn-primary pull-right" @click="$emit('poster-commentaire', '5')">Ajouter</a>
+              <div id="commentaire" v-if="username === ''">
+                  <img src="images/warning.png" width="40" height="40">
+                  Pour lire et/ou écrire un commentaire vous devez être connecté. <u><a @click="$emit('change-page', 'connexion')">Se connecter</a></u>
+              </div>
+
+              <div v-if="username !== ''">
+                  <hr class="style2" />
+                  <div id="listeCommentaire">
+                    <label id="labelCommentaire" for="labelCommentaire" style="border-bottom: 2px solid black;">Commentaires : </label>
+                    <br /><br />
+                    <div id="cssCommentaires" class="commentaireArticle" v-for="comment in varlistofcomments" v-bind:key="comment._id">
+                           {{comment.username}} a écrit le {{comment.date}}, le commentaire suivant : <br/><br/>  {{comment.content}}
+                           <br />
+                           <hr class="style2" />
                     </div>
-                </div>
-                
-            </main>
-    </div>      `
+                  </div>
+
+                  <br />
+                  <div id="commentaireUser">
+                      <label id="labelCommentaire" for="labelCommentaire">Ajouter un commentaire : </label>
+                      <textarea class="form-control rounded-0"  name="comment" v-model="dataComment.content" id="commentaireUserText" rows="10"></textarea>
+                      <br />
+                      <a role="button" class="btn btn-primary pull-right" @click="$emit('poster-commentaire', dataComment)">Ajouter</a>
+                  </div>
+              </div>
+              
+          </main>
+    </div>`,
+        data: function() {
+            return {
+                dataComment : {
+                    'id_article' : 5,
+                    'content' : ''
+                }
+            }
+        },
+        mounted:function () {
+            this.$emit('lire-commentaires',5);
+            this.$forceUpdate();
+        },
     });
 
 
 
     Vue.component('article6',{
-        props : ['username'],
+        props : ['username','varlistofcomments'],
       template: `
         
         <div id="containerArticleEntier">
@@ -968,31 +1066,51 @@
         </div>
 
         <main id="saisieCommentaire">
-                <div id="commentaire" v-if="username === ''">
-                    <img src="images/warning.png" width="40" height="40">
-                    Pour écrire un commentaire vous devez être connecté. <a @click="$emit('change-page', 'connexion')">Se connecter</a>
-                </div>
-    
-                <div v-if="username !== ''">
-                    <div id="listeCommentaire"></div>
-    
-                    <br />
-                    <div id="commentaireUser">
-                        <label id="labelCommentaire" for="labelCommentaire">Commentaire : </label>
-                        <textarea class="form-control rounded-0" id="commentaireUserText" rows="10"></textarea>
-                        <br />
-                        <a role="button" class="btn btn-primary pull-right" @click="$emit('poster-commentaire', '6')">Ajouter</a>
+              <div id="commentaire" v-if="username === ''">
+                  <img src="images/warning.png" width="40" height="40">
+                  Pour lire et/ou écrire un commentaire vous devez être connecté. <u><a @click="$emit('change-page', 'connexion')">Se connecter</a></u>
+              </div>
+
+              <div v-if="username !== ''">
+                  <hr class="style2" />
+                  <div id="listeCommentaire">
+                    <label id="labelCommentaire" for="labelCommentaire" style="border-bottom: 2px solid black;">Commentaires : </label>
+                    <br /><br />
+                    <div id="cssCommentaires" class="commentaireArticle" v-for="comment in varlistofcomments" v-bind:key="comment._id">
+                           {{comment.username}} a écrit le {{comment.date}}, le commentaire suivant : <br/><br/>  {{comment.content}}
+                           <br />
+                           <hr class="style2" />
                     </div>
-                </div>
-                
-            </main>
-    </div>
-      `
+                  </div>
+
+                  <br />
+                  <div id="commentaireUser">
+                      <label id="labelCommentaire" for="labelCommentaire">Ajouter un commentaire : </label>
+                      <textarea class="form-control rounded-0"  name="comment" v-model="dataComment.content" id="commentaireUserText" rows="10"></textarea>
+                      <br />
+                      <a role="button" class="btn btn-primary pull-right" @click="$emit('poster-commentaire', dataComment)">Ajouter</a>
+                  </div>
+              </div>
+              
+          </main>
+    </div>`,
+        data: function() {
+            return {
+                dataComment : {
+                    'id_article' : 6,
+                    'content' : ''
+                }
+            }
+        },
+        mounted:function () {
+            this.$emit('lire-commentaires',6);
+            this.$forceUpdate();
+        },
     });
 
 
     Vue.component('article7',{
-        props : ['username'],
+        props : ['username','varlistofcomments'],
       template: `
         
         <div id="containerArticleEntier">
@@ -1053,31 +1171,51 @@
         </div>
 
         <main id="saisieCommentaire">
-                <div id="commentaire" v-if="username === ''">
-                    <img src="images/warning.png" width="40" height="40">
-                    Pour écrire un commentaire vous devez être connecté. <a @click="$emit('change-page', 'connexion')">Se connecter</a>
-                </div>
-    
-                <div v-if="username !== ''">
-                    <div id="listeCommentaire"></div>
-    
-                    <br />
-                    <div id="commentaireUser">
-                        <label id="labelCommentaire" for="labelCommentaire">Commentaire : </label>
-                        <textarea class="form-control rounded-0" id="commentaireUserText" rows="10"></textarea>
-                        <br />
-                        <a role="button" class="btn btn-primary pull-right" @click="$emit('poster-commentaire', '7')">Ajouter</a>
+              <div id="commentaire" v-if="username === ''">
+                  <img src="images/warning.png" width="40" height="40">
+                  Pour lire et/ou écrire un commentaire vous devez être connecté. <u><a @click="$emit('change-page', 'connexion')">Se connecter</a></u>
+              </div>
+
+              <div v-if="username !== ''">
+                  <hr class="style2" />
+                  <div id="listeCommentaire">
+                    <label id="labelCommentaire" for="labelCommentaire" style="border-bottom: 2px solid black;">Commentaires : </label>
+                    <br /><br />
+                    <div id="cssCommentaires" class="commentaireArticle" v-for="comment in varlistofcomments" v-bind:key="comment._id">
+                           {{comment.username}} a écrit le {{comment.date}}, le commentaire suivant : <br/><br/>  {{comment.content}}
+                           <br />
+                           <hr class="style2" />
                     </div>
-                </div>
-                
-            </main>
-    </div>
-      `
+                  </div>
+
+                  <br />
+                  <div id="commentaireUser">
+                      <label id="labelCommentaire" for="labelCommentaire">Ajouter un commentaire : </label>
+                      <textarea class="form-control rounded-0"  name="comment" v-model="dataComment.content" id="commentaireUserText" rows="10"></textarea>
+                      <br />
+                      <a role="button" class="btn btn-primary pull-right" @click="$emit('poster-commentaire', dataComment)">Ajouter</a>
+                  </div>
+              </div>
+              
+          </main>
+    </div>`,
+        data: function() {
+            return {
+                dataComment : {
+                    'id_article' : 7,
+                    'content' : ''
+                }
+            }
+        },
+        mounted:function () {
+            this.$emit('lire-commentaires',7);
+            this.$forceUpdate();
+        },
     });
 
 
     Vue.component('article8',{
-        props : ['username'],
+        props : ['username','varlistofcomments'],
       template: `
         
         <div id="containerArticleEntier">
@@ -1145,31 +1283,51 @@
         </div>
 
         <main id="saisieCommentaire">
-                <div id="commentaire" v-if="username === ''">
-                    <img src="images/warning.png" width="40" height="40">
-                    Pour écrire un commentaire vous devez être connecté. <a @click="$emit('change-page', 'connexion')">Se connecter</a>
-                </div>
-    
-                <div v-if="username !== ''">
-                    <div id="listeCommentaire"></div>
-    
-                    <br />
-                    <div id="commentaireUser">
-                        <label id="labelCommentaire" for="labelCommentaire">Commentaire : </label>
-                        <textarea class="form-control rounded-0" id="commentaireUserText" rows="10"></textarea>
-                        <br />
-                        <a role="button" class="btn btn-primary pull-right" @click="$emit('poster-commentaire', '8')">Ajouter</a>
+              <div id="commentaire" v-if="username === ''">
+                  <img src="images/warning.png" width="40" height="40">
+                  Pour lire et/ou écrire un commentaire vous devez être connecté. <u><a @click="$emit('change-page', 'connexion')">Se connecter</a></u>
+              </div>
+
+              <div v-if="username !== ''">
+                  <hr class="style2" />
+                  <div id="listeCommentaire">
+                    <label id="labelCommentaire" for="labelCommentaire" style="border-bottom: 2px solid black;">Commentaires : </label>
+                    <br /><br />
+                    <div id="cssCommentaires" class="commentaireArticle" v-for="comment in varlistofcomments" v-bind:key="comment._id">
+                           {{comment.username}} a écrit le {{comment.date}}, le commentaire suivant : <br/><br/>  {{comment.content}}
+                           <br />
+                           <hr class="style2" />
                     </div>
-                </div>
-                
-            </main>
-    </div>
-      `
+                  </div>
+
+                  <br />
+                  <div id="commentaireUser">
+                      <label id="labelCommentaire" for="labelCommentaire">Ajouter un commentaire : </label>
+                      <textarea class="form-control rounded-0"  name="comment" v-model="dataComment.content" id="commentaireUserText" rows="10"></textarea>
+                      <br />
+                      <a role="button" class="btn btn-primary pull-right" @click="$emit('poster-commentaire', dataComment)">Ajouter</a>
+                  </div>
+              </div>
+              
+          </main>
+    </div>`,
+        data: function() {
+            return {
+                dataComment : {
+                    'id_article' : 8,
+                    'content' : ''
+                }
+            }
+        },
+        mounted:function () {
+            this.$emit('lire-commentaires',8);
+            this.$forceUpdate();
+        },
     });
 
 
     Vue.component('article9',{
-        props : ['username'],
+        props : ['username','varlistofcomments'],
       template: `
         
          <div id="containerArticleEntier">
@@ -1244,30 +1402,50 @@
         </div>
 
         <main id="saisieCommentaire">
-                <div id="commentaire" v-if="username === ''">
-                    <img src="images/warning.png" width="40" height="40">
-                    Pour écrire un commentaire vous devez être connecté. <a @click="$emit('change-page', 'connexion')">Se connecter</a>
-                </div>
-    
-                <div v-if="username !== ''">
-                    <div id="listeCommentaire"></div>
-    
-                    <br />
-                    <div id="commentaireUser">
-                        <label id="labelCommentaire" for="labelCommentaire">Commentaire : </label>
-                        <textarea class="form-control rounded-0" id="commentaireUserText" rows="10"></textarea>
-                        <br />
-                        <a role="button" class="btn btn-primary pull-right" @click="$emit('poster-commentaire', '9')">Ajouter</a>
-                    </div>
-                </div>
-                
-            </main>
-    </div>
+              <div id="commentaire" v-if="username === ''">
+                  <img src="images/warning.png" width="40" height="40">
+                  Pour lire et/ou écrire un commentaire vous devez être connecté. <u><a @click="$emit('change-page', 'connexion')">Se connecter</a></u>
+              </div>
 
-      `
+              <div v-if="username !== ''">
+                  <hr class="style2" />
+                  <div id="listeCommentaire">
+                    <label id="labelCommentaire" for="labelCommentaire" style="border-bottom: 2px solid black;">Commentaires : </label>
+                    <br /><br />
+                    <div id="cssCommentaires" class="commentaireArticle" v-for="comment in varlistofcomments" v-bind:key="comment._id">
+                           {{comment.username}} a écrit le {{comment.date}}, le commentaire suivant : <br/><br/>  {{comment.content}}
+                           <br />
+                           <hr class="style2" />
+                    </div>
+                  </div>
+
+                  <br />
+                  <div id="commentaireUser">
+                      <label id="labelCommentaire" for="labelCommentaire">Ajouter un commentaire : </label>
+                      <textarea class="form-control rounded-0"  name="comment" v-model="dataComment.content" id="commentaireUserText" rows="10"></textarea>
+                      <br />
+                      <a role="button" class="btn btn-primary pull-right" @click="$emit('poster-commentaire', dataComment)">Ajouter</a>
+                  </div>
+              </div>
+              
+          </main>
+    </div>`,
+        data: function() {
+            return {
+                dataComment : {
+                    'id_article' : 9,
+                    'content' : ''
+                }
+            }
+        },
+        mounted:function () {
+            this.$emit('lire-commentaires',9);
+            this.$forceUpdate();
+        },
     });
+
     Vue.component('article10',{
-        props : ['username'],
+        props : ['username','varlistofcomments'],
       template: `
         
         <div id="containerArticleEntier">
@@ -1344,29 +1522,51 @@
         </div>
 
         <main id="saisieCommentaire">
-                <div id="commentaire" v-if="username === ''">
-                    <img src="images/warning.png" width="40" height="40">
-                    Pour écrire un commentaire vous devez être connecté. <a @click="$emit('change-page', 'connexion')">Se connecter</a>
-                </div>
-    
-                <div v-if="username !== ''">
-                    <div id="listeCommentaire"></div>
-    
-                    <br />
-                    <div id="commentaireUser">
-                        <label id="labelCommentaire" for="labelCommentaire">Commentaire : </label>
-                        <textarea class="form-control rounded-0" id="commentaireUserText" rows="10"></textarea>
-                        <br />
-                        <a role="button" class="btn btn-primary pull-right" @click="$emit('poster-commentaire', '10')">Ajouter</a>
+              <div id="commentaire" v-if="username === ''">
+                  <img src="images/warning.png" width="40" height="40">
+                  Pour lire et/ou écrire un commentaire vous devez être connecté. <u><a @click="$emit('change-page', 'connexion')">Se connecter</a></u>
+              </div>
+
+              <div v-if="username !== ''">
+                  <hr class="style2" />
+                  <div id="listeCommentaire">
+                    <label id="labelCommentaire" for="labelCommentaire" style="border-bottom: 2px solid black;">Commentaires : </label>
+                    <br /><br />
+                    <div id="cssCommentaires" class="commentaireArticle" v-for="comment in varlistofcomments" v-bind:key="comment._id">
+                           {{comment.username}} a écrit le {{comment.date}}, le commentaire suivant : <br/><br/>  {{comment.content}}
+                           <br />
+                           <hr class="style2" />
                     </div>
-                </div>
-                
-            </main>
-    </div>
-      `
+                  </div>
+
+                  <br />
+                  <div id="commentaireUser">
+                      <label id="labelCommentaire" for="labelCommentaire">Ajouter un commentaire : </label>
+                      <textarea class="form-control rounded-0"  name="comment" v-model="dataComment.content" id="commentaireUserText" rows="10"></textarea>
+                      <br />
+                      <a role="button" class="btn btn-primary pull-right" @click="$emit('poster-commentaire', dataComment)">Ajouter</a>
+                  </div>
+              </div>
+              
+          </main>
+    </div>`,
+        data: function() {
+            return {
+                dataComment : {
+                    'id_article' : 10,
+                    'content' : ''
+                }
+            }
+        },
+        mounted:function () {
+            this.$emit('lire-commentaires',10);
+            this.$forceUpdate();
+        },
     });
+
+
     Vue.component('article15',{
-        props : ['username'],
+        props : ['username','varlistofcomments'],
       template: `
         
         <div id="containerArticleEntier">
@@ -1420,29 +1620,51 @@
         </div>
 
         <main id="saisieCommentaire">
-                <div id="commentaire" v-if="username === ''">
-                    <img src="images/warning.png" width="40" height="40">
-                    Pour écrire un commentaire vous devez être connecté. <a @click="$emit('change-page', 'connexion')">Se connecter</a>
-                </div>
-    
-                <div v-if="username !== ''">
-                    <div id="listeCommentaire"></div>
-    
-                    <br />
-                    <div id="commentaireUser">
-                        <label id="labelCommentaire" for="labelCommentaire">Commentaire : </label>
-                        <textarea class="form-control rounded-0" id="commentaireUserText" rows="10"></textarea>
-                        <br />
-                        <a role="button" class="btn btn-primary pull-right" @click="$emit('poster-commentaire', '15')">Ajouter</a>
+              <div id="commentaire" v-if="username === ''">
+                  <img src="images/warning.png" width="40" height="40">
+                  Pour lire et/ou écrire un commentaire vous devez être connecté. <u><a @click="$emit('change-page', 'connexion')">Se connecter</a></u>
+              </div>
+
+              <div v-if="username !== ''">
+                  <hr class="style2" />
+                  <div id="listeCommentaire">
+                    <label id="labelCommentaire" for="labelCommentaire" style="border-bottom: 2px solid black;">Commentaires : </label>
+                    <br /><br />
+                    <div id="cssCommentaires" class="commentaireArticle" v-for="comment in varlistofcomments" v-bind:key="comment._id">
+                           {{comment.username}} a écrit le {{comment.date}}, le commentaire suivant : <br/><br/>  {{comment.content}}
+                           <br />
+                           <hr class="style2" />
                     </div>
-                </div>
-                
-            </main>
-    </div>
-      `
+                  </div>
+
+                  <br />
+                  <div id="commentaireUser">
+                      <label id="labelCommentaire" for="labelCommentaire">Ajouter un commentaire : </label>
+                      <textarea class="form-control rounded-0"  name="comment" v-model="dataComment.content" id="commentaireUserText" rows="10"></textarea>
+                      <br />
+                      <a role="button" class="btn btn-primary pull-right" @click="$emit('poster-commentaire', dataComment)">Ajouter</a>
+                  </div>
+              </div>
+              
+          </main>
+    </div>`,
+        data: function() {
+            return {
+                dataComment : {
+                    'id_article' : 15,
+                    'content' : ''
+                }
+            }
+        },
+        mounted:function () {
+            this.$emit('lire-commentaires',15);
+            this.$forceUpdate();
+        },
     });
+
+
     Vue.component('article16',{
-        props : ['username'],
+        props : ['username','varlistofcomments'],
       template: `
         
         <div id="containerArticleEntier">
@@ -1526,26 +1748,46 @@
         </div>
 
         <main id="saisieCommentaire">
-                <div id="commentaire" v-if="username === ''">
-                    <img src="images/warning.png" width="40" height="40">
-                    Pour écrire un commentaire vous devez être connecté. <a @click="$emit('change-page', 'connexion')">Se connecter</a>
-                </div>
-    
-                <div v-if="username !== ''">
-                    <div id="listeCommentaire"></div>
-    
-                    <br />
-                    <div id="commentaireUser">
-                        <label id="labelCommentaire" for="labelCommentaire">Commentaire : </label>
-                        <textarea class="form-control rounded-0" id="commentaireUserText" rows="10"></textarea>
-                        <br />
-                        <a role="button" class="btn btn-primary pull-right" @click="$emit('poster-commentaire', '16')">Ajouter</a>
+              <div id="commentaire" v-if="username === ''">
+                  <img src="images/warning.png" width="40" height="40">
+                  Pour lire et/ou écrire un commentaire vous devez être connecté. <u><a @click="$emit('change-page', 'connexion')">Se connecter</a></u>
+              </div>
+
+              <div v-if="username !== ''">
+                  <hr class="style2" />
+                  <div id="listeCommentaire">
+                    <label id="labelCommentaire" for="labelCommentaire" style="border-bottom: 2px solid black;">Commentaires : </label>
+                    <br /><br />
+                    <div id="cssCommentaires" class="commentaireArticle" v-for="comment in varlistofcomments" v-bind:key="comment._id">
+                           {{comment.username}} a écrit le {{comment.date}}, le commentaire suivant : <br/><br/>  {{comment.content}}
+                           <br />
+                           <hr class="style2" />
                     </div>
-                </div>
-                
-            </main>
-    </div>
-      `
+                  </div>
+
+                  <br />
+                  <div id="commentaireUser">
+                      <label id="labelCommentaire" for="labelCommentaire">Ajouter un commentaire : </label>
+                      <textarea class="form-control rounded-0"  name="comment" v-model="dataComment.content" id="commentaireUserText" rows="10"></textarea>
+                      <br />
+                      <a role="button" class="btn btn-primary pull-right" @click="$emit('poster-commentaire', dataComment)">Ajouter</a>
+                  </div>
+              </div>
+              
+          </main>
+    </div>`,
+        data: function() {
+            return {
+                dataComment : {
+                    'id_article' : 16,
+                    'content' : ''
+                }
+            }
+        },
+        mounted:function () {
+            this.$emit('lire-commentaires',16);
+            this.$forceUpdate();
+        },
     });
 
 
