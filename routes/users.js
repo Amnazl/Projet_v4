@@ -199,6 +199,14 @@ router.post('/:idComment/comment/deleteComment',function(req,res) {
 });
 
 
+router.post('/comment/editComment', (req, res) => {
+
+    Comment.editComment(req.body);
+    res.send('OK');
+
+})
+
+
 
 router.get('/logout', (req, res, next) => {
     req.session.destroy(function (err){

@@ -137,6 +137,18 @@ const app = new Vue({
               }
               alert("Votre commentaire a été supprimé");
           })
+      },
+
+      editComment(dataComment1){
+
+        console.log("content"+dataComment1.content);
+        var dataComment = [dataComment1.id,dataComment1.content];
+          this.$http.post('/users/comment/editComment', dataComment,{
+              withCredentials : true,
+              method : 'POST',
+          }).then((req) => {
+              alert("Votre commentaire a été modifié");
+          })
       }
   },
 

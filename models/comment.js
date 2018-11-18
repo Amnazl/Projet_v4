@@ -61,6 +61,24 @@ module.exports.addComment = function(newComment, callback){
 }
 
 
+module.exports.editComment = function(dataComment){
+    fs.readFile('comments.json', 'utf-8', function(err, data) {
+        data = JSON.parse(data);
+
+        for(i = 0; i < data.comments.length; i++){
+            if(data.comments[i]._id === dataComment[0]){
+                console.log("ca passe");
+                data.comments[i].content;
+                data.comments[i].date = new Date().toLocaleString('fr-FR', { timeZone: 'UTC' });
+            }
+        }
+        fs.writeFile('comments.json', JSON.stringify(data,null,2), 'utf-8', function(err) {
+            //console.log(data);
+        })
+
+    });
+}
+
 module.exports.deleteComment = function(id_comment){
     fs.readFile('comments.json', 'utf-8', function(err, data) {
         data = JSON.parse(data);

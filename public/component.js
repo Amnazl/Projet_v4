@@ -485,14 +485,13 @@
                   <td>{{commentbyusername.id_article}}</td>
                   <td><input :value="commentbyusername.content"></td>
                   <td>{{commentbyusername.date}}</td>
-                  <td><input type="button" value="Modifier"></td>
+                  <td><input type="button" @click="$emit('editer-commentaire', {'id':commentbyusername._id,'content':commentbyusername.content})" value="Modifier"></td>
                   <td><input type="button" @click="$emit('supprimer-commentaires-by-id', commentbyusername._id)" value="Suppression"></td>
                 </tr>
               </tbody>
             </table>
         </div>
       `,
-
         mounted: function () {
             this.$emit('lire-commentaires-by-username');
             this.$forceUpdate();
