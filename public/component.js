@@ -519,7 +519,7 @@
           <label id="titreArticleEntier">
               Comment la 5G va-t-elle changer nos vies ?
           </label>
-          <img id="imageArticle" src="images/article1.jpg " width="600" height="250" style="margin-left : 24%;">
+          <img id="imageArticle" src="images/article1.jpg " width="600" height="250" style="margin-left : 24%; margin-right : 24%;">
           <br /> <br />
           <div id="texteArticle">
               &nbsp&nbsp&nbsp Prêts pour l’ultra haut débit ? La 5G frappe à nos portes.
@@ -640,7 +640,7 @@
         <label id="titreArticleEntier">
             Mettez-vous dans la peau des personnes du 3e âge grâce à ce simulateur de vieillesse
         </label>
-        <img id="imageArticle" src="images/article2.png " width="600" height="250" style="margin-left : 24%;">
+        <img id="imageArticle" src="images/article2.png " class="rounded" width="600" height="250" style="margin-left : 24%;">
         <br /> <br />
         <div id="texteArticle">
             &nbsp&nbsp&nbsp Aux quatre coins de la France, des expériences sont menées en réalité virtuelle pour
