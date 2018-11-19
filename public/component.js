@@ -1968,7 +1968,7 @@
 
         </div>
 
-  <main id="saisieCommentaire">
+            <main id="saisieCommentaire">
               <div id="commentaire" v-if="username === ''">
                   <img src="images/warning.png" width="40" height="40">
                   Pour lire et/ou écrire un commentaire vous devez être connecté. <u><a @click="$emit('change-page', 'connexion')">Se connecter</a></u>
