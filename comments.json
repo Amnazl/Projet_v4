@@ -1,25 +1,11 @@
 {
   "comments": [
     {
-      "_id": "5be98320cfab791e3cff97cc",
-      "username": "marouj",
-      "id_article": 1,
-      "content": "Ilyess",
-      "date": 1542030112193
-    },
-    {
       "_id": "5bf2ce94a585e051299665a2",
       "username": "amine",
       "id_article": 1,
-      "content": "amine",
-      "date": "19/11/2018 à 15:54:12"
-    },
-    {
-      "_id": "5bf2cea1a585e051299665a3",
-      "username": "amine",
-      "id_article": 16,
-      "content": "amine 2",
-      "date": "19/11/2018 à 15:54:25"
+      "content": "super interessant cet article",
+      "date": "19/11/2018 à 16:20:23"
     }
   ]
 }
