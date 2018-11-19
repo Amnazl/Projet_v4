@@ -17,7 +17,6 @@ console.log(users_file);
 
 
 
-var routes = require('./routes/index');
 var users = require('./routes/users');
 
 //Init App
@@ -62,7 +61,6 @@ app.use(expressValidator({
 
 
 
-app.use('/', routes);
 app.use('/users', users);
 
 // Set Port
