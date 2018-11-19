@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var fs = require('fs');
 
 
-
+//Schema d'un commentaire dans le fichier json
 var CommentSchema = mongoose.Schema({
     username: {
         type: String
@@ -25,7 +25,7 @@ var CommentSchema = mongoose.Schema({
 
 var Comment = module.exports = mongoose.model('Comment', CommentSchema);
 
-
+//Ajoute un commentaire dans le fichier json
 module.exports.addComment = function(newComment, callback){
 
 
@@ -45,45 +45,27 @@ module.exports.addComment = function(newComment, callback){
     });
 
 
-
-
-    /*	var query = Comment.count();
-        query.exec(function (err, count) {
-            if(err) throw err;
-            newComment.id = count +1 ;
-            newComment.save(callback);
-
-         });*/
-
-
-
 }
 
-
+//Edition d'un commentaire dans un fichier
 module.exports.editComment = function(dataComment){
     fs.readFile('comments.json', 'utf-8', function(err, data) {
         data = JSON.parse(data);
 
         for(i = 0; i < data.comments.length; i++){
             if(data.comments[i]._id === dataComment[0]){
-                console.log("ca passe");
-                console.log("avant modif : " + data.comments[i].content);
-
                 data.comments[i].content = dataComment[1];
-
-
-                console.log("TETE" + dataComment[1]);
-                console.log("après modif : " + data.comments[i].content);
                 data.comments[i].date = new Date().toLocaleString('fr-FR');
             }
         }
         fs.writeFile('comments.json', JSON.stringify(data,null,2), 'utf-8', function(err) {
-            //console.log(data);
         })
 
     });
 }
 
+
+//Suppresion du commentaire
 module.exports.deleteComment = function(id_comment){
     fs.readFile('comments.json', 'utf-8', function(err, data) {
         data = JSON.parse(data);
@@ -94,11 +76,12 @@ module.exports.deleteComment = function(id_comment){
             }
         }
         fs.writeFile('comments.json', JSON.stringify(data,null,2), 'utf-8', function(err) {
-            //console.log(data);
         })
     });
 }
 
+
+//Récupération des comm par Username
 module.exports.getCommentByUsername = function(username, callback){
 
     fs.readFile('comments.json', 'utf-8', function(err, data) {
@@ -118,6 +101,8 @@ module.exports.getCommentByUsername = function(username, callback){
 
 }
 
+
+//Récupération des comm par Article
 module.exports.getCommentByArticle = function(id_article, callback){
     fs.readFile('comments.json', 'utf-8', function(err, data) {
         data = JSON.parse(data);

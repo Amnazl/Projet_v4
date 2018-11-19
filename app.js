@@ -3,20 +3,18 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 var expressValidator = require('express-validator');
-var flash = require('connect-flash');
 var session = require('express-session');
-var passport = require('passport');
 var fs = require('fs');
 
 
-var cons = require('consolidate');
 
+
+//Lecture et affichage de tous les utilisateurs connus par notre serveur
 var date_file = fs.readFileSync('users.json');
-
 var users_file = JSON.parse(date_file);
-
-
 console.log(users_file);
+
+
 
 
 var routes = require('./routes/index');
@@ -26,18 +24,6 @@ var users = require('./routes/users');
 
 var app = express();
 
-//View Engine 
-
-
-
-// view engine setup
-app.engine('html', cons.swig)
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'html');
-
-//app.set('views', path.join(__dirname, 'views'));
-/*app.engine('handlebars', exphbs({defaultLayout:'layout'}));
-app.set('view engine', 'handlebars');*/
 
 // BodyParser Middleware
 app.use(bodyParser.json());
@@ -46,24 +32,15 @@ app.use(cookieParser());
 
 
 // Set Static folder
-
-
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Express Session
 app.use(session({
     secret: 'secret',
-    /*saveUninitialized: true,
-    resave: true,
-    cookie: { secure: true},*/
+    resave: false,
+    saveUninitialized: true
 }));
 
-
-
-
-// Passport init
-app.use(passport.initialize());
-app.use(passport.session());
 
 // Express Validator
 app.use(expressValidator({
@@ -84,20 +61,6 @@ app.use(expressValidator({
 }));
 
 
-
-//Connect Flash 
-
-app.use(flash());
-
-
-// Global Vars
-app.use(function (req, res, next) {
-  res.locals.success_msg = req.flash('success_msg');
-  res.locals.error_msg = req.flash('error_msg');
-  res.locals.error = req.flash('error');
-  res.locals.user = req.user || null;
-  next();
-});
 
 app.use('/', routes);
 app.use('/users', users);

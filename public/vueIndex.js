@@ -14,10 +14,11 @@ const app = new Vue({
       varListOfCommentsByUsername: [],
   },
 
+
+    //A chaque refresh de la page on va regarder si la session de l'utilisateur est encore valide coté serveur.
   created () {
       this.$http.get('/users/user')
           .then(user => {
-              //alert("ca passe");
               if(user.data){
                   this.username = user.data;
               }
@@ -27,17 +28,19 @@ const app = new Vue({
           })
   },
   methods: {
-
+      //Equivalent du redirect
       changePage (page) {
           this.currentPage = page;
       },
 
+
+      /*Fonction qui va verifier les informations
+      du formulaire d'inscription puis va requeter le serveur pour que le nouvel utilisateur
+      soit enregistré dans le fichier json.
+      */
       inscription(dataInscriptionUser){
 
       if((dataInscriptionUser.username !== '' && dataInscriptionUser.name !== '' && dataInscriptionUser.password !== '') || (dataInscriptionUser.password !== dataInscriptionUser.password2)) {
-           /* if (!(dataInscriptionUser.password === dataInscriptionUser.password2)) {
-                alert("Les mots de passe différents");
-            } else {*/
                 this.$http.post('/users/register', dataInscriptionUser).then((req) => {
                     if (req.data === 'Inscription réussi') {
                         console.log("Reussi");
@@ -48,13 +51,13 @@ const app = new Vue({
                         alert(req.data);
                     }
                 });
-           // }
       }else{
         alert("Veuillez rentrer tous les champs et indiquer les mêmes mot de passes.");
       }
 
     },
 
+      //route qui va requeter le serveur pour savoir si les données de connexion sont valides.
       connexionUser(identifiantsUser){
 
         this.$http.post('/users/login', identifiantsUser,{
@@ -71,6 +74,8 @@ const app = new Vue({
         })
       },
 
+      //route qui va demander la destruction de la session auprès du serveur.
+
       logout(){
         this.$http.get('/users/logout').then(() => {
             this.username = '';
@@ -78,17 +83,15 @@ const app = new Vue({
         })
       },
 
-
+      //Récupère les commentaires par username
       getCommentByUsername(){
           this.$http.get('/users/'+this.username+'/comments/user').then(listOfCommentsByUsername => {
-              console.log("1" + listOfCommentsByUsername.data[0].content);
               this.varListOfCommentsByUsername = listOfCommentsByUsername.data;
-              console.log("2" + this.varListOfCommentsByUsername[0].content);
           })
 
       },
 
-
+      //Récupère les commentaires par id article
       getCommentByArticle(idArticle){
 
 
@@ -99,7 +102,7 @@ const app = new Vue({
 
       },
 
-
+      //Ajout d'un nouveau commentaire sur le serveur
       postCommentByArticle(dataComment){
 
         if(dataComment.content === ''){
@@ -114,12 +117,14 @@ const app = new Vue({
                 }else if (req.data === 'OK') {
                     alert("Votre commentaire a été ajouté");
                     this.varListOfComments.push(dataComment);
-                    //document.location.reload(true);
 
                 }
             })
         }
       },
+
+
+      //Suppresion commentaire par son id sur le serveur
 
       deleteCommentById(id_comment){
           this.$http.post('/users/'+id_comment+'/comment/deleteComment', id_comment,{
@@ -136,9 +141,9 @@ const app = new Vue({
           })
       },
 
+      //Modification commentaire sur le serveur
       editComment(dataComment1){
 
-        console.log("test1"+dataComment1.content);
         var dataComment = [dataComment1.id,dataComment1.content];
           this.$http.post('/users/comment/editComment', dataComment,{
               withCredentials : true,

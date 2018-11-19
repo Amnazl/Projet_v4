@@ -1,6 +1,10 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
 var fs = require('fs');
+
+
+
+//Schema d'un utilisateur pour le fichier json
 var UserSchema = mongoose.Schema({
     username: {
         type: String,
@@ -22,12 +26,6 @@ var User = module.exports = mongoose.model('User', UserSchema);
 
 module.exports.createUser = function(newUser, callback){
 
-    //Verifier si le nom d'utilisateur est déjà utilisé
-    //var query = User.count();
-    //query.where('username', newUser.username);
-
-
-
     bcrypt.genSalt(10, function(err, salt) {
         bcrypt.hash(newUser.password, salt, function(err, hash) {
             newUser.password = hash;
@@ -37,6 +35,7 @@ module.exports.createUser = function(newUser, callback){
 }
 
 
+//Récupération des données d'un user par username
 module.exports.getUserByUsername = function(username,callback){
     fs.readFile('users.json', 'utf-8', function(err, data) {
         data = JSON.parse(data);
@@ -53,6 +52,8 @@ module.exports.getUserByUsername = function(username,callback){
     });
 }
 
+
+//Récupération des données d'un user par id
 module.exports.getUserById = function(id, callback){
     //User.findById(id, callback);
     fs.readFile('users.json', 'utf-8', function(err, data) {
@@ -66,13 +67,14 @@ module.exports.getUserById = function(id, callback){
     });
 }
 
+
+//Méthode qui permet de comparer le hash du mot de passe dans le json et celui que l'utilisateur veut utiliser pour se connecter
 module.exports.comparePassword = function(candidatePassword, hash, callback){
 
-    //callback(null,1);
+
     bcrypt.compare(candidatePassword, hash, function(err, isMatch) {
         if(err) throw err;
         console.log(isMatch);
         callback(null, isMatch);
-        //console.log(candidatePassword);
     });
 }

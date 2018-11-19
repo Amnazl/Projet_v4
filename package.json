@@ -1,34 +1,24 @@
 {
-  "name": "gestion_user3",
+  "name": "news",
   "version": "1.0.0",
-  "description": "test gestion user",
+  "description": "Site web permettant la consultation et la saisi de commentaire",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js"
   },
-  "author": "ilyess marouf",
+  "author": "MAROUF Ilyess & AZLOUK Amine",
   "license": "ISC",
   "dependencies": {
-    "@progress/kendo-grid-vue-wrapper": "^2018.3.1025",
-    "@progress/kendo-theme-default": "^2.60.0",
-    "@progress/kendo-ui": "^2018.3.1114",
     "bcryptjs": "*",
     "body-parser": "*",
-    "connect-flash": "*",
-    "consolidate": "^0.15.1",
     "cookie-parser": "*",
-    "cors": "^2.8.5",
     "express": "*",
-    "express-handlebars": "*",
     "express-messages": "*",
     "express-session": "*",
     "express-validator": "*",
     "fs": "0.0.1-security",
     "jsonfile": "^5.0.0",
-    "mongoose": "^5.3.12",
-    "passport": "*",
-    "passport-http": "*",
-    "passport-local": "*"
+    "mongoose": "^5.3.12"
   },
   "devDependencies": {
     "body-parser": "^1.18.3"
