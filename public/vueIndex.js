@@ -116,8 +116,6 @@ const app = new Vue({
                     this.varListOfComments.push(dataComment);
                     //document.location.reload(true);
 
-
-
                 }
             })
         }

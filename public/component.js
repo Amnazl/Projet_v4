@@ -496,7 +496,7 @@
               <tbody>
                 <tr v-for="commentbyusername in varlistofcommentsbyusername" v-bind:key="commentbyusername._id">
                   <td>{{commentbyusername.id_article}}</td>
-                  <td> <input :value="commentbyusername.content"></td>
+                  <td> <input v-model="commentbyusername.content"></td>
                   <td>{{commentbyusername.date}}</td>
                   <td><input type="button" class="btn btn-primary" @click="$emit('editer-commentaire', {'id':commentbyusername._id,'content': commentbyusername.content})" value="Modifier"></td>
                   <td><input type="button" class="btn btn-primary" @click="$emit('supprimer-commentaires-by-id', commentbyusername._id)" value="Supprimer"></td>
@@ -505,8 +505,6 @@
             </table>
         </div>
       `,
-
-
         mounted: function () {
             this.$emit('lire-commentaires-by-username');
             this.$forceUpdate();
@@ -577,19 +575,28 @@
                   <div id="listeCommentaire">
                     <label id="labelCommentaire" for="labelCommentaire" style="border-bottom: 2px solid black;">Commentaires : </label>
                     <br /><br />
-                    <div id="cssCommentaires" class="commentaireArticle" v-for="comment in varlistofcomments" v-bind:key="comment._id">
-                           {{comment.username}} a écrit le {{comment.date}}, le commentaire suivant : <br/><br/>  {{comment.content}}
-                           <br />
-                           <hr class="style2" />
+                    <div id="cssCommentaires"class="commentaireArticle" v-for="comment in varlistofcomments" v-bind:key="comment._id">
+                            <div v-if="!comment.username">
+                                {{username}} viens d'écrire ce commentaire : <br/><br/>  {{comment.content}}
+                                <br />
+                                <hr class="style2" />
+                            </div>
+                            <div v-else-if="comment.username">
+                                {{comment.username}} a écrit le {{comment.date}}, le commentaire suivant : <br/><br/>  {{comment.content}}
+                                <br />
+                                <hr class="style2" />
+                            </div>
+
+                           
                     </div>
                   </div>
 
                   <br />
                   <div id="commentaireUser">
                       <label id="labelCommentaire" for="labelCommentaire">Ajouter un commentaire : </label>
-                      <textarea class="form-control rounded-0"  name="comment" v-model="dataComment.content" id="commentaireUserText" rows="10"></textarea>
+                      <textarea class="form-control rounded-0"  name="comment" v-model="dataTextArea.content" id="commentaireUserText" rows="10"></textarea>
                       <br />
-                      <a role="button" class="btn btn-primary pull-right" @click="$emit('poster-commentaire', dataComment)">Ajouter</a>
+                      <a role="button" class="btn btn-primary pull-right" @click="postComment(dataComment)">Ajouter</a>
                   </div>
               </div>
               
@@ -601,13 +608,29 @@
                 dataComment : {
                     'id_article' : 1,
                     'content' : ''
+                },
+
+                dataTextArea : {
+                    'content' : ''
                 }
             }
         },
+        methods: {
+          postComment : function(dataComment){
+
+              dataComment.content = this.dataTextArea.content;
+              //console.log(dataComment);
+              this.$emit('poster-commentaire', dataComment);
+              this.dataTextArea.content = '';
+          }
+        },
+
         mounted:function () {
             this.$emit('lire-commentaires',1);
             this.$forceUpdate();
         },
+
+
     });
 
 
@@ -675,7 +698,7 @@
 
         </div>
 
-        <main id="saisieCommentaire">
+         <main id="saisieCommentaire">
               <div id="commentaire" v-if="username === ''">
                   <img src="images/warning.png" width="40" height="40">
                   Pour lire et/ou écrire un commentaire vous devez être connecté. <u><a @click="$emit('change-page', 'connexion')">Se connecter</a></u>
@@ -686,30 +709,53 @@
                   <div id="listeCommentaire">
                     <label id="labelCommentaire" for="labelCommentaire" style="border-bottom: 2px solid black;">Commentaires : </label>
                     <br /><br />
-                    <div id="cssCommentaires" class="commentaireArticle" v-for="comment in varlistofcomments" v-bind:key="comment._id">
-                           {{comment.username}} a écrit le {{comment.date}}, le commentaire suivant : <br/><br/>  {{comment.content}}
-                           <br />
-                           <hr class="style2" />
+                    <div id="cssCommentaires"class="commentaireArticle" v-for="comment in varlistofcomments" v-bind:key="comment._id">
+                            <div v-if="!comment.username">
+                                {{username}} viens d'écrire ce commentaire : <br/><br/>  {{comment.content}}
+                                <br />
+                                <hr class="style2" />
+                            </div>
+                            <div v-else-if="comment.username">
+                                {{comment.username}} a écrit le {{comment.date}}, le commentaire suivant : <br/><br/>  {{comment.content}}
+                                <br />
+                                <hr class="style2" />
+                            </div>
+
+                           
                     </div>
                   </div>
 
                   <br />
                   <div id="commentaireUser">
                       <label id="labelCommentaire" for="labelCommentaire">Ajouter un commentaire : </label>
-                      <textarea class="form-control rounded-0"  name="comment" v-model="dataComment.content" id="commentaireUserText" rows="10"></textarea>
+                      <textarea class="form-control rounded-0"  name="comment" v-model="dataTextArea.content" id="commentaireUserText" rows="10"></textarea>
                       <br />
-                      <a role="button" class="btn btn-primary pull-right" @click="$emit('poster-commentaire', dataComment)">Ajouter</a>
+                      <a role="button" class="btn btn-primary pull-right" @click="postComment(dataComment)">Ajouter</a>
                   </div>
               </div>
               
           </main>
+
       </div>`,
+
         data: function() {
             return {
                 dataComment : {
                     'id_article' : 2,
                     'content' : ''
+                },
+
+                dataTextArea : {
+                    'content' : ''
                 }
+            }
+        },
+        methods: {
+            postComment : function(dataComment){
+
+                dataComment.content = this.dataTextArea.content;
+                this.$emit('poster-commentaire', dataComment);
+                this.dataTextArea.content = '';
             }
         },
         mounted:function () {
@@ -775,29 +821,38 @@
                   <br />
                   <div id="commentaireUser">
                       <label id="labelCommentaire" for="labelCommentaire">Ajouter un commentaire : </label>
-                      <textarea class="form-control rounded-0"  name="comment" v-model="dataComment.content" id="commentaireUserText" rows="10"></textarea>
+                      <textarea class="form-control rounded-0"  name="comment" v-model="dataTextArea.content" id="commentaireUserText" rows="10"></textarea>
                       <br />
-                      <a role="button" class="btn btn-primary pull-right" @click="$emit('poster-commentaire', dataComment)">Ajouter</a>
+                      <a role="button" class="btn btn-primary pull-right" @click="postComment(dataComment)">Ajouter</a>
                   </div>
               </div>
               
           </main>
     </div>`,
         data: function() {
-        return {
-            dataComment : {
-                'id_article' : 3,
-                'content' : ''
+            return {
+                dataComment : {
+                    'id_article' : 3,
+                    'content' : ''
+                },
+
+                dataTextArea : {
+                    'content' : ''
+                }
             }
-        }
-    },
-    mounted:function () {
-        this.$emit('lire-commentaires',3);
-        this.$forceUpdate();
-    },
+        },
+        methods: {
+            postComment : function(dataComment){
+                dataComment.content = this.dataTextArea.content;
+                this.$emit('poster-commentaire', dataComment);
+                this.dataTextArea.content = '';
+            }
+        },
+        mounted:function () {
+            this.$emit('lire-commentaires',3);
+            this.$forceUpdate();
+        },
     });
-
-
 
     Vue.component('article4',{
         props : ['username','varlistofcomments'],
@@ -857,7 +912,7 @@
 
         </div>
 
-        <main id="saisieCommentaire">
+         <main id="saisieCommentaire">
               <div id="commentaire" v-if="username === ''">
                   <img src="images/warning.png" width="40" height="40">
                   Pour lire et/ou écrire un commentaire vous devez être connecté. <u><a @click="$emit('change-page', 'connexion')">Se connecter</a></u>
@@ -868,19 +923,28 @@
                   <div id="listeCommentaire">
                     <label id="labelCommentaire" for="labelCommentaire" style="border-bottom: 2px solid black;">Commentaires : </label>
                     <br /><br />
-                    <div id="cssCommentaires" class="commentaireArticle" v-for="comment in varlistofcomments" v-bind:key="comment._id">
-                           {{comment.username}} a écrit le {{comment.date}}, le commentaire suivant : <br/><br/>  {{comment.content}}
-                           <br />
-                           <hr class="style2" />
+                    <div id="cssCommentaires"class="commentaireArticle" v-for="comment in varlistofcomments" v-bind:key="comment._id">
+                            <div v-if="!comment.username">
+                                {{username}} viens d'écrire ce commentaire : <br/><br/>  {{comment.content}}
+                                <br />
+                                <hr class="style2" />
+                            </div>
+                            <div v-else-if="comment.username">
+                                {{comment.username}} a écrit le {{comment.date}}, le commentaire suivant : <br/><br/>  {{comment.content}}
+                                <br />
+                                <hr class="style2" />
+                            </div>
+
+                           
                     </div>
                   </div>
 
                   <br />
                   <div id="commentaireUser">
                       <label id="labelCommentaire" for="labelCommentaire">Ajouter un commentaire : </label>
-                      <textarea class="form-control rounded-0"  name="comment" v-model="dataComment.content" id="commentaireUserText" rows="10"></textarea>
+                      <textarea class="form-control rounded-0"  name="comment" v-model="dataTextArea.content" id="commentaireUserText" rows="10"></textarea>
                       <br />
-                      <a role="button" class="btn btn-primary pull-right" @click="$emit('poster-commentaire', dataComment)">Ajouter</a>
+                      <a role="button" class="btn btn-primary pull-right" @click="postComment(dataComment)">Ajouter</a>
                   </div>
               </div>
               
@@ -891,7 +955,18 @@
                 dataComment : {
                     'id_article' : 4,
                     'content' : ''
+                },
+
+                dataTextArea : {
+                    'content' : ''
                 }
+            }
+        },
+        methods: {
+            postComment : function(dataComment){
+                dataComment.content = this.dataTextArea.content;
+                this.$emit('poster-commentaire', dataComment);
+                this.dataTextArea.content = '';
             }
         },
         mounted:function () {
@@ -899,7 +974,6 @@
             this.$forceUpdate();
         },
     });
-
 
 
     Vue.component('article5',{
@@ -960,7 +1034,7 @@
             <br /><br />
         </div>
 
-        <main id="saisieCommentaire">
+         <main id="saisieCommentaire">
               <div id="commentaire" v-if="username === ''">
                   <img src="images/warning.png" width="40" height="40">
                   Pour lire et/ou écrire un commentaire vous devez être connecté. <u><a @click="$emit('change-page', 'connexion')">Se connecter</a></u>
@@ -971,19 +1045,28 @@
                   <div id="listeCommentaire">
                     <label id="labelCommentaire" for="labelCommentaire" style="border-bottom: 2px solid black;">Commentaires : </label>
                     <br /><br />
-                    <div id="cssCommentaires" class="commentaireArticle" v-for="comment in varlistofcomments" v-bind:key="comment._id">
-                           {{comment.username}} a écrit le {{comment.date}}, le commentaire suivant : <br/><br/>  {{comment.content}}
-                           <br />
-                           <hr class="style2" />
+                    <div id="cssCommentaires"class="commentaireArticle" v-for="comment in varlistofcomments" v-bind:key="comment._id">
+                            <div v-if="!comment.username">
+                                {{username}} viens d'écrire ce commentaire : <br/><br/>  {{comment.content}}
+                                <br />
+                                <hr class="style2" />
+                            </div>
+                            <div v-else-if="comment.username">
+                                {{comment.username}} a écrit le {{comment.date}}, le commentaire suivant : <br/><br/>  {{comment.content}}
+                                <br />
+                                <hr class="style2" />
+                            </div>
+
+                           
                     </div>
                   </div>
 
                   <br />
                   <div id="commentaireUser">
                       <label id="labelCommentaire" for="labelCommentaire">Ajouter un commentaire : </label>
-                      <textarea class="form-control rounded-0"  name="comment" v-model="dataComment.content" id="commentaireUserText" rows="10"></textarea>
+                      <textarea class="form-control rounded-0"  name="comment" v-model="dataTextArea.content" id="commentaireUserText" rows="10"></textarea>
                       <br />
-                      <a role="button" class="btn btn-primary pull-right" @click="$emit('poster-commentaire', dataComment)">Ajouter</a>
+                      <a role="button" class="btn btn-primary pull-right" @click="postComment(dataComment)">Ajouter</a>
                   </div>
               </div>
               
@@ -994,7 +1077,18 @@
                 dataComment : {
                     'id_article' : 5,
                     'content' : ''
+                },
+
+                dataTextArea : {
+                    'content' : ''
                 }
+            }
+        },
+        methods: {
+            postComment : function(dataComment){
+                dataComment.content = this.dataTextArea.content;
+                this.$emit('poster-commentaire', dataComment);
+                this.dataTextArea.content = '';
             }
         },
         mounted:function () {
@@ -1002,8 +1096,6 @@
             this.$forceUpdate();
         },
     });
-
-
 
     Vue.component('article6',{
         props : ['username','varlistofcomments'],
@@ -1076,19 +1168,28 @@
                   <div id="listeCommentaire">
                     <label id="labelCommentaire" for="labelCommentaire" style="border-bottom: 2px solid black;">Commentaires : </label>
                     <br /><br />
-                    <div id="cssCommentaires" class="commentaireArticle" v-for="comment in varlistofcomments" v-bind:key="comment._id">
-                           {{comment.username}} a écrit le {{comment.date}}, le commentaire suivant : <br/><br/>  {{comment.content}}
-                           <br />
-                           <hr class="style2" />
+                    <div id="cssCommentaires"class="commentaireArticle" v-for="comment in varlistofcomments" v-bind:key="comment._id">
+                            <div v-if="!comment.username">
+                                {{username}} viens d'écrire ce commentaire : <br/><br/>  {{comment.content}}
+                                <br />
+                                <hr class="style2" />
+                            </div>
+                            <div v-else-if="comment.username">
+                                {{comment.username}} a écrit le {{comment.date}}, le commentaire suivant : <br/><br/>  {{comment.content}}
+                                <br />
+                                <hr class="style2" />
+                            </div>
+
+                           
                     </div>
                   </div>
 
                   <br />
                   <div id="commentaireUser">
                       <label id="labelCommentaire" for="labelCommentaire">Ajouter un commentaire : </label>
-                      <textarea class="form-control rounded-0"  name="comment" v-model="dataComment.content" id="commentaireUserText" rows="10"></textarea>
+                      <textarea class="form-control rounded-0"  name="comment" v-model="dataTextArea.content" id="commentaireUserText" rows="10"></textarea>
                       <br />
-                      <a role="button" class="btn btn-primary pull-right" @click="$emit('poster-commentaire', dataComment)">Ajouter</a>
+                      <a role="button" class="btn btn-primary pull-right" @click="postComment(dataComment)">Ajouter</a>
                   </div>
               </div>
               
@@ -1099,7 +1200,18 @@
                 dataComment : {
                     'id_article' : 6,
                     'content' : ''
+                },
+
+                dataTextArea : {
+                    'content' : ''
                 }
+            }
+        },
+        methods: {
+            postComment : function(dataComment){
+                dataComment.content = this.dataTextArea.content;
+                this.$emit('poster-commentaire', dataComment);
+                this.dataTextArea.content = '';
             }
         },
         mounted:function () {
@@ -1181,19 +1293,28 @@
                   <div id="listeCommentaire">
                     <label id="labelCommentaire" for="labelCommentaire" style="border-bottom: 2px solid black;">Commentaires : </label>
                     <br /><br />
-                    <div id="cssCommentaires" class="commentaireArticle" v-for="comment in varlistofcomments" v-bind:key="comment._id">
-                           {{comment.username}} a écrit le {{comment.date}}, le commentaire suivant : <br/><br/>  {{comment.content}}
-                           <br />
-                           <hr class="style2" />
+                    <div id="cssCommentaires"class="commentaireArticle" v-for="comment in varlistofcomments" v-bind:key="comment._id">
+                            <div v-if="!comment.username">
+                                {{username}} viens d'écrire ce commentaire : <br/><br/>  {{comment.content}}
+                                <br />
+                                <hr class="style2" />
+                            </div>
+                            <div v-else-if="comment.username">
+                                {{comment.username}} a écrit le {{comment.date}}, le commentaire suivant : <br/><br/>  {{comment.content}}
+                                <br />
+                                <hr class="style2" />
+                            </div>
+
+                           
                     </div>
                   </div>
 
                   <br />
                   <div id="commentaireUser">
                       <label id="labelCommentaire" for="labelCommentaire">Ajouter un commentaire : </label>
-                      <textarea class="form-control rounded-0"  name="comment" v-model="dataComment.content" id="commentaireUserText" rows="10"></textarea>
+                      <textarea class="form-control rounded-0"  name="comment" v-model="dataTextArea.content" id="commentaireUserText" rows="10"></textarea>
                       <br />
-                      <a role="button" class="btn btn-primary pull-right" @click="$emit('poster-commentaire', dataComment)">Ajouter</a>
+                      <a role="button" class="btn btn-primary pull-right" @click="postComment(dataComment)">Ajouter</a>
                   </div>
               </div>
               
@@ -1204,7 +1325,18 @@
                 dataComment : {
                     'id_article' : 7,
                     'content' : ''
+                },
+
+                dataTextArea : {
+                    'content' : ''
                 }
+            }
+        },
+        methods: {
+            postComment : function(dataComment){
+                dataComment.content = this.dataTextArea.content;
+                this.$emit('poster-commentaire', dataComment);
+                this.dataTextArea.content = '';
             }
         },
         mounted:function () {
@@ -1293,30 +1425,51 @@
                   <div id="listeCommentaire">
                     <label id="labelCommentaire" for="labelCommentaire" style="border-bottom: 2px solid black;">Commentaires : </label>
                     <br /><br />
-                    <div id="cssCommentaires" class="commentaireArticle" v-for="comment in varlistofcomments" v-bind:key="comment._id">
-                           {{comment.username}} a écrit le {{comment.date}}, le commentaire suivant : <br/><br/>  {{comment.content}}
-                           <br />
-                           <hr class="style2" />
+                    <div id="cssCommentaires"class="commentaireArticle" v-for="comment in varlistofcomments" v-bind:key="comment._id">
+                            <div v-if="!comment.username">
+                                {{username}} viens d'écrire ce commentaire : <br/><br/>  {{comment.content}}
+                                <br />
+                                <hr class="style2" />
+                            </div>
+                            <div v-else-if="comment.username">
+                                {{comment.username}} a écrit le {{comment.date}}, le commentaire suivant : <br/><br/>  {{comment.content}}
+                                <br />
+                                <hr class="style2" />
+                            </div>
+
+                           
                     </div>
                   </div>
 
                   <br />
                   <div id="commentaireUser">
                       <label id="labelCommentaire" for="labelCommentaire">Ajouter un commentaire : </label>
-                      <textarea class="form-control rounded-0"  name="comment" v-model="dataComment.content" id="commentaireUserText" rows="10"></textarea>
+                      <textarea class="form-control rounded-0"  name="comment" v-model="dataTextArea.content" id="commentaireUserText" rows="10"></textarea>
                       <br />
-                      <a role="button" class="btn btn-primary pull-right" @click="$emit('poster-commentaire', dataComment)">Ajouter</a>
+                      <a role="button" class="btn btn-primary pull-right" @click="postComment(dataComment)">Ajouter</a>
                   </div>
               </div>
               
           </main>
+
     </div>`,
         data: function() {
             return {
                 dataComment : {
                     'id_article' : 8,
                     'content' : ''
+                },
+
+                dataTextArea : {
+                    'content' : ''
                 }
+            }
+        },
+        methods: {
+            postComment : function(dataComment){
+                dataComment.content = this.dataTextArea.content;
+                this.$emit('poster-commentaire', dataComment);
+                this.dataTextArea.content = '';
             }
         },
         mounted:function () {
@@ -1401,7 +1554,7 @@
 
         </div>
 
-        <main id="saisieCommentaire">
+         <main id="saisieCommentaire">
               <div id="commentaire" v-if="username === ''">
                   <img src="images/warning.png" width="40" height="40">
                   Pour lire et/ou écrire un commentaire vous devez être connecté. <u><a @click="$emit('change-page', 'connexion')">Se connecter</a></u>
@@ -1412,19 +1565,28 @@
                   <div id="listeCommentaire">
                     <label id="labelCommentaire" for="labelCommentaire" style="border-bottom: 2px solid black;">Commentaires : </label>
                     <br /><br />
-                    <div id="cssCommentaires" class="commentaireArticle" v-for="comment in varlistofcomments" v-bind:key="comment._id">
-                           {{comment.username}} a écrit le {{comment.date}}, le commentaire suivant : <br/><br/>  {{comment.content}}
-                           <br />
-                           <hr class="style2" />
+                    <div id="cssCommentaires"class="commentaireArticle" v-for="comment in varlistofcomments" v-bind:key="comment._id">
+                            <div v-if="!comment.username">
+                                {{username}} viens d'écrire ce commentaire : <br/><br/>  {{comment.content}}
+                                <br />
+                                <hr class="style2" />
+                            </div>
+                            <div v-else-if="comment.username">
+                                {{comment.username}} a écrit le {{comment.date}}, le commentaire suivant : <br/><br/>  {{comment.content}}
+                                <br />
+                                <hr class="style2" />
+                            </div>
+
+                           
                     </div>
                   </div>
 
                   <br />
                   <div id="commentaireUser">
                       <label id="labelCommentaire" for="labelCommentaire">Ajouter un commentaire : </label>
-                      <textarea class="form-control rounded-0"  name="comment" v-model="dataComment.content" id="commentaireUserText" rows="10"></textarea>
+                      <textarea class="form-control rounded-0"  name="comment" v-model="dataTextArea.content" id="commentaireUserText" rows="10"></textarea>
                       <br />
-                      <a role="button" class="btn btn-primary pull-right" @click="$emit('poster-commentaire', dataComment)">Ajouter</a>
+                      <a role="button" class="btn btn-primary pull-right" @click="postComment(dataComment)">Ajouter</a>
                   </div>
               </div>
               
@@ -1435,7 +1597,18 @@
                 dataComment : {
                     'id_article' : 9,
                     'content' : ''
+                },
+
+                dataTextArea : {
+                    'content' : ''
                 }
+            }
+        },
+        methods: {
+            postComment : function(dataComment){
+                dataComment.content = this.dataTextArea.content;
+                this.$emit('poster-commentaire', dataComment);
+                this.dataTextArea.content = '';
             }
         },
         mounted:function () {
@@ -1521,7 +1694,7 @@
 
         </div>
 
-        <main id="saisieCommentaire">
+  <main id="saisieCommentaire">
               <div id="commentaire" v-if="username === ''">
                   <img src="images/warning.png" width="40" height="40">
                   Pour lire et/ou écrire un commentaire vous devez être connecté. <u><a @click="$emit('change-page', 'connexion')">Se connecter</a></u>
@@ -1532,19 +1705,28 @@
                   <div id="listeCommentaire">
                     <label id="labelCommentaire" for="labelCommentaire" style="border-bottom: 2px solid black;">Commentaires : </label>
                     <br /><br />
-                    <div id="cssCommentaires" class="commentaireArticle" v-for="comment in varlistofcomments" v-bind:key="comment._id">
-                           {{comment.username}} a écrit le {{comment.date}}, le commentaire suivant : <br/><br/>  {{comment.content}}
-                           <br />
-                           <hr class="style2" />
+                    <div id="cssCommentaires"class="commentaireArticle" v-for="comment in varlistofcomments" v-bind:key="comment._id">
+                            <div v-if="!comment.username">
+                                {{username}} viens d'écrire ce commentaire : <br/><br/>  {{comment.content}}
+                                <br />
+                                <hr class="style2" />
+                            </div>
+                            <div v-else-if="comment.username">
+                                {{comment.username}} a écrit le {{comment.date}}, le commentaire suivant : <br/><br/>  {{comment.content}}
+                                <br />
+                                <hr class="style2" />
+                            </div>
+
+                           
                     </div>
                   </div>
 
                   <br />
                   <div id="commentaireUser">
                       <label id="labelCommentaire" for="labelCommentaire">Ajouter un commentaire : </label>
-                      <textarea class="form-control rounded-0"  name="comment" v-model="dataComment.content" id="commentaireUserText" rows="10"></textarea>
+                      <textarea class="form-control rounded-0"  name="comment" v-model="dataTextArea.content" id="commentaireUserText" rows="10"></textarea>
                       <br />
-                      <a role="button" class="btn btn-primary pull-right" @click="$emit('poster-commentaire', dataComment)">Ajouter</a>
+                      <a role="button" class="btn btn-primary pull-right" @click="postComment(dataComment)">Ajouter</a>
                   </div>
               </div>
               
@@ -1555,7 +1737,18 @@
                 dataComment : {
                     'id_article' : 10,
                     'content' : ''
+                },
+
+                dataTextArea : {
+                    'content' : ''
                 }
+            }
+        },
+        methods: {
+            postComment : function(dataComment){
+                dataComment.content = this.dataTextArea.content;
+                this.$emit('poster-commentaire', dataComment);
+                this.dataTextArea.content = '';
             }
         },
         mounted:function () {
@@ -1563,7 +1756,6 @@
             this.$forceUpdate();
         },
     });
-
 
     Vue.component('article15',{
         props : ['username','varlistofcomments'],
@@ -1619,7 +1811,7 @@
 
         </div>
 
-        <main id="saisieCommentaire">
+  <main id="saisieCommentaire">
               <div id="commentaire" v-if="username === ''">
                   <img src="images/warning.png" width="40" height="40">
                   Pour lire et/ou écrire un commentaire vous devez être connecté. <u><a @click="$emit('change-page', 'connexion')">Se connecter</a></u>
@@ -1630,30 +1822,51 @@
                   <div id="listeCommentaire">
                     <label id="labelCommentaire" for="labelCommentaire" style="border-bottom: 2px solid black;">Commentaires : </label>
                     <br /><br />
-                    <div id="cssCommentaires" class="commentaireArticle" v-for="comment in varlistofcomments" v-bind:key="comment._id">
-                           {{comment.username}} a écrit le {{comment.date}}, le commentaire suivant : <br/><br/>  {{comment.content}}
-                           <br />
-                           <hr class="style2" />
+                    <div id="cssCommentaires"class="commentaireArticle" v-for="comment in varlistofcomments" v-bind:key="comment._id">
+                            <div v-if="!comment.username">
+                                {{username}} viens d'écrire ce commentaire : <br/><br/>  {{comment.content}}
+                                <br />
+                                <hr class="style2" />
+                            </div>
+                            <div v-else-if="comment.username">
+                                {{comment.username}} a écrit le {{comment.date}}, le commentaire suivant : <br/><br/>  {{comment.content}}
+                                <br />
+                                <hr class="style2" />
+                            </div>
+
+                           
                     </div>
                   </div>
 
                   <br />
                   <div id="commentaireUser">
                       <label id="labelCommentaire" for="labelCommentaire">Ajouter un commentaire : </label>
-                      <textarea class="form-control rounded-0"  name="comment" v-model="dataComment.content" id="commentaireUserText" rows="10"></textarea>
+                      <textarea class="form-control rounded-0"  name="comment" v-model="dataTextArea.content" id="commentaireUserText" rows="10"></textarea>
                       <br />
-                      <a role="button" class="btn btn-primary pull-right" @click="$emit('poster-commentaire', dataComment)">Ajouter</a>
+                      <a role="button" class="btn btn-primary pull-right" @click="postComment(dataComment)">Ajouter</a>
                   </div>
               </div>
               
           </main>
+
     </div>`,
         data: function() {
             return {
                 dataComment : {
                     'id_article' : 15,
                     'content' : ''
+                },
+
+                dataTextArea : {
+                    'content' : ''
                 }
+            }
+        },
+        methods: {
+            postComment : function(dataComment){
+                dataComment.content = this.dataTextArea.content;
+                this.$emit('poster-commentaire', dataComment);
+                this.dataTextArea.content = '';
             }
         },
         mounted:function () {
@@ -1747,7 +1960,7 @@
 
         </div>
 
-        <main id="saisieCommentaire">
+  <main id="saisieCommentaire">
               <div id="commentaire" v-if="username === ''">
                   <img src="images/warning.png" width="40" height="40">
                   Pour lire et/ou écrire un commentaire vous devez être connecté. <u><a @click="$emit('change-page', 'connexion')">Se connecter</a></u>
@@ -1758,19 +1971,28 @@
                   <div id="listeCommentaire">
                     <label id="labelCommentaire" for="labelCommentaire" style="border-bottom: 2px solid black;">Commentaires : </label>
                     <br /><br />
-                    <div id="cssCommentaires" class="commentaireArticle" v-for="comment in varlistofcomments" v-bind:key="comment._id">
-                           {{comment.username}} a écrit le {{comment.date}}, le commentaire suivant : <br/><br/>  {{comment.content}}
-                           <br />
-                           <hr class="style2" />
+                    <div id="cssCommentaires"class="commentaireArticle" v-for="comment in varlistofcomments" v-bind:key="comment._id">
+                            <div v-if="!comment.username">
+                                {{username}} viens d'écrire ce commentaire : <br/><br/>  {{comment.content}}
+                                <br />
+                                <hr class="style2" />
+                            </div>
+                            <div v-else-if="comment.username">
+                                {{comment.username}} a écrit le {{comment.date}}, le commentaire suivant : <br/><br/>  {{comment.content}}
+                                <br />
+                                <hr class="style2" />
+                            </div>
+
+                           
                     </div>
                   </div>
 
                   <br />
                   <div id="commentaireUser">
                       <label id="labelCommentaire" for="labelCommentaire">Ajouter un commentaire : </label>
-                      <textarea class="form-control rounded-0"  name="comment" v-model="dataComment.content" id="commentaireUserText" rows="10"></textarea>
+                      <textarea class="form-control rounded-0"  name="comment" v-model="dataTextArea.content" id="commentaireUserText" rows="10"></textarea>
                       <br />
-                      <a role="button" class="btn btn-primary pull-right" @click="$emit('poster-commentaire', dataComment)">Ajouter</a>
+                      <a role="button" class="btn btn-primary pull-right" @click="postComment(dataComment)">Ajouter</a>
                   </div>
               </div>
               
@@ -1781,7 +2003,18 @@
                 dataComment : {
                     'id_article' : 16,
                     'content' : ''
+                },
+
+                dataTextArea : {
+                    'content' : ''
                 }
+            }
+        },
+        methods: {
+            postComment : function(dataComment){
+                dataComment.content = this.dataTextArea.content;
+                this.$emit('poster-commentaire', dataComment);
+                this.dataTextArea.content = '';
             }
         },
         mounted:function () {
@@ -1789,7 +2022,6 @@
             this.$forceUpdate();
         },
     });
-
 
 
 

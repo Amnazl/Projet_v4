@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-//var autoIncrement = require("mongodb-autoincrement");
 var fs = require('fs');
 
 
@@ -71,9 +70,11 @@ module.exports.editComment = function(dataComment){
                 console.log("avant modif : " + data.comments[i].content);
 
                 data.comments[i].content = dataComment[1];
+
+
                 console.log("TETE" + dataComment[1]);
                 console.log("après modif : " + data.comments[i].content);
-                data.comments[i].date = new Date().toLocaleString('fr-FR', { timeZone: 'UTC' });
+                data.comments[i].date = new Date().toLocaleString('fr-FR');
             }
         }
         fs.writeFile('comments.json', JSON.stringify(data,null,2), 'utf-8', function(err) {

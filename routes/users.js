@@ -224,7 +224,7 @@ router.post('/:idArticle/comment/addComment',function(req,res){
         username: req.session.user.username,
         id_article: req.params.idArticle,
         content: content_comment,
-        date : new Date().toLocaleString('fr-FR', { timeZone: 'UTC' }),
+        date : new Date().toLocaleString('fr-FR'),
     });
     Comment.addComment(newComment, function(err,comment){
         if(err){
