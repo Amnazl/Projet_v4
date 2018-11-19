@@ -808,10 +808,19 @@
                   <div id="listeCommentaire">
                     <label id="labelCommentaire" for="labelCommentaire" style="border-bottom: 2px solid black;">Commentaires : </label>
                     <br /><br />
-                    <div id="cssCommentaires" class="commentaireArticle" v-for="comment in varlistofcomments" v-bind:key="comment._id">
-                           {{comment.username}} a écrit le {{comment.date}}, le commentaire suivant : <br/><br/>  {{comment.content}}
-                           <br />
-                           <hr class="style2" />
+                    <div id="cssCommentaires"class="commentaireArticle" v-for="comment in varlistofcomments" v-bind:key="comment._id">
+                            <div v-if="!comment.username">
+                                {{username}} viens d'écrire ce commentaire : <br/><br/>  {{comment.content}}
+                                <br />
+                                <hr class="style2" />
+                            </div>
+                            <div v-else-if="comment.username">
+                                {{comment.username}} a écrit le {{comment.date}}, le commentaire suivant : <br/><br/>  {{comment.content}}
+                                <br />
+                                <hr class="style2" />
+                            </div>
+
+                           
                     </div>
                   </div>
 
@@ -826,6 +835,7 @@
               
           </main>
     </div>`,
+
         data: function() {
             return {
                 dataComment : {
@@ -840,6 +850,7 @@
         },
         methods: {
             postComment : function(dataComment){
+
                 dataComment.content = this.dataTextArea.content;
                 this.$emit('poster-commentaire', dataComment);
                 this.dataTextArea.content = '';
