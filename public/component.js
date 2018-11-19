@@ -24,9 +24,6 @@
                      <li> <a class="nav-link" v-if="username !== ''" @click="$emit('change-page', 'mon-compte')">Mon compte</a></li>
                 </li>
                 
-                <li class="nav-item">
-                     <li> <a class="nav-link" @click="$emit('change-page', 'contact')">Contact</a></li>
-                </li>
 
 
 
@@ -2021,46 +2018,6 @@
             this.$emit('lire-commentaires',16);
             this.$forceUpdate();
         },
-    });
-
-
-
-
-
-    Vue.component('contact',{
-      template: `
-        
-        <div class="containerContact">
-          <div class="col-md-5">
-              <div class="form-area">
-                  <form action="" id="formContact" method="POST" role="form">
-                      <br style="clear:both">
-                      <h3 style="margin-bottom: 25px; text-align: center;">Besoin de nous contacter ?</h3>
-                      <div class="form-group">
-                          <input type="text" class="form-control" id="name" name="name" placeholder="Nom" required>
-                      </div>
-                      <div class="form-group">
-                          <input type="text" class="form-control" id="email" name="email" placeholder="Email" required>
-                      </div>
-                      <div class="form-group">
-                          <input type="text" class="form-control" id="telephone" name="telephone" placeholder="Téléphone mobile"
-                              required>
-                      </div>
-                      <div class="form-group">
-                          <input type="text" class="form-control" id="objet" name="objet" placeholder="Objet" required>
-                      </div>
-                      <div class="form-group">
-                          <textarea class="form-control" type="textarea" id="message" placeholder="Message" rows="7"></textarea>
-                      </div>
-
-                      <button type="submit" id="submit" name="submit" class="btn btn-primary pull-right">Envoyer le
-                          formulaire</button>
-                        <br/>
-                  </form>
-              </div>
-          </div>
-        </div>
-      `
     });
 
     
